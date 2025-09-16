@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <title>Turnpikes 4-Day Team Meet-up</title>
   <style>
-    /* Your existing styles */
     .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
     .timeline li { position: relative; padding-left: 2rem; }
     .timeline li:before {
       content: ''; position: absolute; left: 0; top: 0; width: 10px; height: 10px;
@@ -18,10 +18,9 @@
     .project-item { display: flex; align-items: center; gap: 1rem; }
     .project-img img { border-radius: 0.5rem; object-fit: cover; }
 
-    /* --- Day-by-day view (NEW) --- */
+    /* --- Day-by-day view --- */
     section.day { display: none; }
     section.day.active { display: block; }
-    /* Optional: highlight active link in your header nav */
     #header .nav-list a.active { color: #fcb900; font-weight: 700; }
   </style>
 </head>
@@ -33,11 +32,13 @@
       <div class="nav-bar">
         <div class="brand">
           <a href="#hero">
-            <h1><img src="https://turnpikes.pro/wp-content/uploads/2024/08/turnpikes-logo.svg" alt="Turnpikes Logo"/></h1>
+            <h1><img src="https://turnpikes.pro/wp-content/uploads/2024/08/turnpikes-logo.svg" alt="Turnpikes Logo" /></h1>
           </a>
         </div>
         <div class="nav-list">
-          <div class="hamburger"><div class="bar"></div></div>
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
           <ul>
             <li><a href="#hero" data-after="Home">Home</a></li>
             <li><a href="#monday" data-after="Monday">Monday</a></li>
@@ -51,7 +52,7 @@
   </section>
   <!-- End Header -->
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section id="hero" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-20">
     <div class="hero container mx-auto px-4 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to the</h1>
@@ -60,9 +61,9 @@
       <a href="#monday" class="cta inline-block bg-white text-yellow-500 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition">View Agenda</a>
     </div>
   </section>
-  <!-- End Hero -->
+  <!-- End Hero Section -->
 
-  <!-- Monday -->
+  <!-- MONDAY -->
   <section id="monday" class="day py-12">
     <div class="container mx-auto px-4">
       <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">Monday's <span class="text-yellow-500">Agenda</span></h1>
@@ -71,38 +72,23 @@
           <ul>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">09:00 AM - 10:30 AM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Team Meeting & Project Review</h1>
-                <p class="text-gray-600">Location: Large Board Room</p>
+                <h3 class="date text-gray-500 font-semibold">09:30 – 11:00</h3>
+                <h1 class="text-xl font-bold text-gray-800">Coffee with TransAlta & Pembina</h1>
+                <p class="text-gray-600">AM: Coffee catch-ups.</p>
               </div>
             </li>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">10:30 AM - 12:00 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Training Session</h1>
-                <p class="text-gray-600">Location: Large Board Room</p>
+                <h3 class="date text-gray-500 font-semibold">12:00 – 13:00</h3>
+                <h1 class="text-xl font-bold text-gray-800">Lunch with OpenText folks</h1>
+                <p class="text-gray-600">Including Justin Bague.</p>
               </div>
             </li>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">12:00 PM - 1:00 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Lunch</h1>
-                <p id="menu" class="text-gray-600">Pizza</p>
-              </div>
-            </li>
-            <li class="card bg-white p-6 rounded-lg shadow-md">
-              <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">2:00 PM - 4:00 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Discovery Phase Workshop</h1>
-                <p class="text-gray-600">Location: Main Conference Room</p>
-              </div>
-            </li>
-            <li class="card bg-white p-6 rounded-lg shadow-md">
-              <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">7:00 PM - 9:00 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Team Dinner</h1>
-                <p class="text-gray-600">Location: The Keg Steakhouse</p>
-                <p id="menu" class="text-gray-600">Address: 320 4 Ave SW, Calgary, AB T2P 2S6</p>
+                <h3 class="date text-gray-500 font-semibold">13:10 onwards</h3>
+                <h1 class="text-xl font-bold text-gray-800">Team 1:1s with Tim</h1>
+                <p class="text-gray-600">PM: Rolling 1:1s for the team.</p>
               </div>
             </li>
           </ul>
@@ -110,86 +96,73 @@
       </div>
     </div>
   </section>
+  <!-- End Monday -->
 
-  <!-- Tuesday -->
+  <!-- TUESDAY -->
   <section id="tuesday" class="day py-12 bg-gray-50">
     <div class="container mx-auto px-4">
-      <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">Tuesday's <span class="text-yellow-500">Activities</span></h1>
-      <div class="all-projects grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="project-item card bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
-          <div class="project-info flex-1">
-            <h1 class="text-xl font-bold text-gray-800">Escape Room</h1>
-            <h2 class="text-gray-500 font-semibold">11:30 AM - 12:30 PM</h2>
-            <p id="menu" class="text-gray-600"><strong class="text-red-500">! Hotel pickup at 10:45 AM</strong><br>Address: Unit 5, 3030 Sunridge Way NE, Calgary, AB</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/escape.jpg" alt="Escape Room" class="w-32 h-32 md:w-40 md:h-40 object-cover">
-          </div>
-        </div>
-        <div class="project-item card bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
-          <div class="project-info flex-1">
-            <h1 class="text-xl font-bold text-gray-800">Bowling</h1>
-            <h2 class="text-gray-500 font-semibold">1:15 PM - 2:45 PM</h2>
-            <p id="menu" class="text-gray-600"><strong class="text-red-500">! Drop-off at hotel after event</strong><br>Address: 2916 5th Ave NE, Calgary, AB T2A 6K4</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/bowl.jpg" alt="Bowling" class="w-32 h-32 md:w-40 md:h-40 object-cover">
+      <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">Tuesday's <span class="text-yellow-500">Plan</span></h1>
+      <div class="all-projects grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="project-item card bg-white p-6 rounded-lg shadow-md">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Sales Plan & Workshops</h1>
+            <h2 class="text-gray-500 font-semibold">09:00 – 16:00</h2>
+            <ul class="list-disc pl-5 text-gray-700 mt-2 space-y-1">
+              <li>Overview of Projects YTD</li>
+              <li>‘Working with Europe’ — Charan / Naveen</li>
+              <li>Arlette on AI</li>
+            </ul>
           </div>
         </div>
-        <div class="project-item card bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
-          <div class="project-info flex-1">
-            <h1 class="text-xl font-bold text-gray-800">Dinner</h1>
-            <h2 class="text-gray-500 font-semibold">7:00 PM - 9:00 PM</h2>
-            <p id="menu" class="text-gray-600"><strong class="text-red-500">! Hotel pickup at 6:00 PM</strong><br>Location: Tamarind East Indian Restaurant<br>Address: 1110 Panatella Blvd NW #610, Calgary, AB T3K 0G6</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/dinner.jpg" alt="Dinner" class="w-32 h-32 md:w-40 md:h-40 object-cover">
+        <div class="project-item card bg-white p-6 rounded-lg shadow-md">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Team Dinner</h1>
+            <h2 class="text-gray-500 font-semibold">Evening</h2>
+            <p class="text-gray-700">Venue TBA.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- End Tuesday -->
 
-  <!-- Wednesday -->
+  <!-- WEDNESDAY -->
   <section id="wednesday" class="day py-12">
     <div class="container mx-auto px-4">
-      <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">Wednesday's <span class="text-yellow-500">Activities</span></h1>
-      <div class="all-projects grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="project-item card bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
-          <div class="project-info flex-1">
-            <h1 class="text-xl font-bold text-gray-800">Laser Tag</h1>
-            <h2 class="text-gray-500 font-semibold">10:00 AM - 11:30 AM</h2>
-            <p id="menu" class="text-gray-600"><strong class="text-red-500">! Hotel pickup at 9:15 AM</strong><br>Address: 10480 Cityscape Dr NE, Calgary, AB T3N 0P3</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/lasertag.jpg" alt="Laser Tag" class="w-32 h-32 md:w-40 md:h-40 object-cover">
+      <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">Wednesday's <span class="text-yellow-500">Agenda</span></h1>
+      <div class="all-projects grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="project-item card bg-white p-6 rounded-lg shadow-md">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">OpenText Partner Meetings</h1>
+            <h2 class="text-gray-500 font-semibold">AM — PM</h2>
+            <p class="text-gray-700">Day of meetings with partners and customers.</p>
           </div>
         </div>
-        <div class="project-item card bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
-          <div class="project-info flex-1">
-            <h1 class="text-xl font-bold text-gray-800">Lunch</h1>
-            <h2 class="text-gray-500 font-semibold">12:00 PM - 1:00 PM</h2>
-            <p id="menu" class="text-gray-600">Location: Local Food Court<br>Address: 2525 36 St NE, Calgary, AB T1Y 5T4</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/lunch.jpg" alt="Lunch" class="w-32 h-32 md:w-40 md:h-40 object-cover">
+        <div class="project-item card bg-white p-6 rounded-lg shadow-md">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Dinner with John Lawson / OpenText</h1>
+            <h2 class="text-gray-500 font-semibold">Evening</h2>
           </div>
         </div>
-        <div class="project-item card bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
-          <div class="project-info flex-1">
-            <h1 class="text-xl font-bold text-gray-800">Go-Kart Racing</h1>
-            <h2 class="text-gray-500 font-semibold">2:00 PM - 3:30 PM</h2>
-            <p id="menu" class="text-gray-600"><strong class="text-red-500">! Drop-off at hotel after event</strong><br>Address: 125 Stewart Blvd, Calgary, AB T3R 0N6</p>
+        <div class="project-item card bg-white p-6 rounded-lg shadow-md">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Vermilion Coffee / Lunch</h1>
+            <h2 class="text-gray-500 font-semibold">TBD</h2>
+            <p class="text-gray-700">Timing/venue to be confirmed.</p>
           </div>
-          <div class="project-img">
-            <img src="./img/gokart.jpg" alt="Go-Kart Racing" class="w-32 h-32 md:w-40 md:h-40 object-cover">
+        </div>
+        <div class="project-item card bg-white p-6 rounded-lg shadow-md">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Additional Meetings</h1>
+            <p class="text-gray-700">Ashley working on additional meetings that day.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- End Wednesday -->
 
-  <!-- Thursday -->
+  <!-- THURSDAY -->
   <section id="thursday" class="day py-12 bg-gray-50">
     <div class="container mx-auto px-4">
       <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">Thursday's <span class="text-yellow-500">Agenda</span></h1>
@@ -198,30 +171,26 @@
           <ul>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">09:00 AM - 10:30 AM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Wrap-Up Meeting</h1>
-                <p class="text-gray-600">Location: Large Board Room</p>
+                <h3 class="date text-gray-500 font-semibold">10:00 AM – 12:00 PM</h3>
+                <h1 class="text-xl font-bold text-gray-800">Nose Hill Park Trek</h1>
               </div>
             </li>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">10:30 AM - 12:00 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Feedback & Planning Session</h1>
-                <p class="text-gray-600">Location: Large Board Room</p>
+                <h3 class="date text-gray-500 font-semibold">12:00 PM – 2:00 PM</h3>
+                <h1 class="text-xl font-bold text-gray-800">Lunch</h1>
               </div>
             </li>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">12:00 PM - 1:00 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Farewell Lunch</h1>
-                <p id="menu" class="text-gray-600">Buffet</p>
+                <h3 class="date text-gray-500 font-semibold">5:00 PM – 6:00 PM</h3>
+                <h1 class="text-xl font-bold text-gray-800">Axe Throw</h1>
               </div>
             </li>
             <li class="card bg-white p-6 rounded-lg shadow-md">
               <div class="timeline-content">
-                <h3 class="date text-gray-500 font-semibold">1:30 PM - 2:30 PM</h3>
-                <h1 class="text-xl font-bold text-gray-800">Team Photo & Closing</h1>
-                <p class="text-gray-600">Location: Hotel Lobby</p>
+                <h3 class="date text-gray-500 font-semibold">6:30 PM</h3>
+                <h1 class="text-xl font-bold text-gray-800">Dinner at Hitchki Restaurant</h1>
               </div>
             </li>
           </ul>
@@ -229,6 +198,7 @@
       </div>
     </div>
   </section>
+  <!-- End Thursday -->
 
   <!-- Footer -->
   <section id="footer" class="bg-gray-800 text-white py-12">
@@ -239,20 +209,19 @@
       <h2 class="text-lg font-semibold my-4"><span class="text-yellow-500">Experience saves money -</span> the embarrassing photos are free!</h2>
       <div class="social-icon flex justify-center gap-4">
         <div class="social-item">
-          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" alt="Facebook" class="w-12 h-12"/></a>
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" alt="Facebook" class="w-12 h-12" /></a>
         </div>
         <div class="social-item">
-          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" alt="Instagram" class="w-12 h-12"/></a>
+          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" alt="Instagram" class="w-12 h-12" /></a>
         </div>
       </div>
       <p class="mt-4">Copyright © 2025 Turnpikes. All rights reserved.</p>
     </div>
   </section>
 
-  <!-- Day Switcher (NEW) -->
+  <!-- Day Switcher -->
   <script>
     (function () {
-      // Only switch these sections; leave #hero working normally
       const validIds = ['#monday', '#tuesday', '#wednesday', '#thursday'];
       const links = document.querySelectorAll('#header .nav-list a[href^="#"]');
       const days = validIds.map(sel => document.querySelector(sel)).filter(Boolean);
@@ -260,7 +229,6 @@
       function show(id) {
         days.forEach(sec => sec.classList.toggle('active', '#' + sec.id === id));
         links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-        // Scroll to section (skip hero)
         if (id !== '#hero') {
           const el = document.querySelector(id);
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -275,7 +243,6 @@
         }
       });
 
-      // Default day
       const start = validIds.includes(location.hash) ? location.hash : '#monday';
       show(start);
     })();
