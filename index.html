@@ -20,6 +20,13 @@
     .card h3{margin:0 0 6px;font-size:16px;color:#f1f5f9}
     .time{font-weight:700;color:#fff}
     .desc{margin-top:8px;color:#cbd5e1}
+      /* Day-by-day view */
+    section.day{display:none}
+    section.day.active{display:block}
+    /* Force single-column cards for focused daily view */
+    .cards{grid-template-columns:1fr}
+    /* Highlight active day link in your original header nav */
+    #header .nav-list a.active{color:var(--brand);font-weight:700}
   </style>
 </head>
 <body>
@@ -60,7 +67,7 @@
 
   <main class="container">
     <!-- MONDAY -->
-    <section class="day" id="mon">
+    <section class="day active" id="mon">
       <h2>Monday — Sept 22</h2>
       <div class="cards">
         <div class="card">
@@ -135,5 +142,23 @@
       </div>
     </section>
   </main>
+  <script>
+    (function(){
+      const links = document.querySelectorAll('#header .nav-list a[href^="#"]');
+      const days = document.querySelectorAll('section.day');
+      function show(id){
+        days.forEach(d=>d.classList.toggle('active', '#'+d.id===id));
+        links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+        try{ history.replaceState(null,'',id); }catch(e){}
+        const el = document.querySelector(id);
+        if(el){ window.scrollTo({top: el.offsetTop - 80, behavior:'smooth'}); }
+      }
+      links.forEach(a=>{
+        a.addEventListener('click', (e)=>{ e.preventDefault(); show(a.getAttribute('href')); });
+      });
+      const start = (location.hash && document.querySelector(location.hash)) ? location.hash : '#mon';
+      show(start);
+    })();
+  </script>
 </body>
 </html>
