@@ -1,6 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+	/* ===== THURSDAY cards like your screenshot (compact right-side thumbs) ===== */
+#thursday .all-projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  #thursday .all-projects { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  #thursday .all-projects { grid-template-columns: repeat(3, 1fr); }
+}
 
+#thursday .project-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+/* Kill any global "img {width:100%}" impact inside Thursday thumbnails */
+#thursday .project-img img {
+  width: 80px !important;
+  height: 80px !important;
+  max-width: none !important;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;          /* don't let the image stretch the card */
+}
+
+/* Typography polish (optional) */
+#thursday .project-info h1 { 
+  margin: 0 0 4px; 
+  font-size: 1.25rem; 
+  line-height: 1.2; 
+  color: #1f2937;       /* gray-800 */
+  font-weight: 700;
+}
+#thursday .project-info h2 { 
+  margin: 0 0 8px; 
+  color: #6b7280;       /* gray-500 */
+  font-weight: 600;
+}
+#thursday #menu { color: #4b5563; } /* gray-600 */
+#thursday #menu strong { color: #ef4444; } /* red-500 */
+
+</style>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -220,6 +271,7 @@
 </body>
 
 </html>
+
 
 
 
