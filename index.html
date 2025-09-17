@@ -133,6 +133,59 @@
       #thursday .section-title::before,
       #thursday .section-title::after{ width:clamp(18px,10vw,48px); }
     }
+
+    /* ===== Thursday: mobile stack (heading on top, cards below) ===== */
+@media (max-width: 768px) {
+  /* Make the Thursday wrapper a single column */
+  #thursday > .container{
+    display: block !important;          /* override flex from the template */
+    align-items: initial !important;
+    justify-content: initial !important;
+    gap: 0 !important;
+  }
+
+  /* Ensure heading appears first, full width */
+  #thursday .section-title{
+    display: block;
+    width: 100%;
+    margin: 0 0 14px;
+    text-align: center;
+    order: -1;                          /* if the parent stays flex, this still forces it first */
+  }
+
+  /* List of cards directly under the heading */
+  #thursday .all-projects{
+    display: flex !important;
+    flex-direction: column !important;  /* vertical list */
+    gap: 12px;
+    order: 0;
+  }
+
+  /* Cards are full width; tidy spacing */
+  #thursday .project-item{
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  /* Smaller thumbnails on phones */
+  #thursday .project-img img{
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  /* Let long lines wrap instead of forcing horizontal scroll */
+  #thursday .project-info{ min-width: 0; }
+  #thursday .project-info h1,
+  #thursday .project-info h2,
+  #thursday .project-info p{
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    margin: 0 0 6px;
+  }
+}
+
   </style>
 </head>
 
@@ -327,3 +380,4 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
