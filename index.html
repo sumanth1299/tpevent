@@ -51,6 +51,59 @@
 #thursday #menu { color: #4b5563; } /* gray-600 */
 #thursday #menu strong { color: #ef4444; } /* red-500 */
 
+	/* ===== Hover effects for Thursday cards ===== */
+#thursday .project-item {
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+  will-change: transform, box-shadow;
+}
+#thursday .project-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  background-color: #f9fafb; /* subtle tint */
+}
+
+/* Slight zoom on the thumbnail */
+#thursday .project-img img {
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+#thursday .project-item:hover .project-img img {
+  transform: scale(1.06);
+  box-shadow: 0 6px 14px rgba(0,0,0,.15);
+}
+
+/* Title underline + color on hover */
+#thursday .project-info h1 {
+  transition: color .18s ease, text-decoration-color .18s ease;
+  text-decoration: underline transparent;
+  text-underline-offset: 3px;
+}
+#thursday .project-item:hover .project-info h1 {
+  color: #111827; /* darker (gray-900) */
+  text-decoration-color: #f59e0b; /* amber underline */
+}
+
+/* Make the red alert pop a bit on hover (optional) */
+#thursday .project-item:hover #menu strong {
+  filter: saturate(1.15) brightness(1.05);
+}
+
+/* Focus styles for keyboard users */
+#thursday .project-item:focus-within {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+  transform: translateY(-2px);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #thursday .project-item,
+  #thursday .project-img img,
+  #thursday .project-info h1 {
+    transition: none;
+  }
+}
+
+
 </style>
 <head>
   <meta charset="UTF-8">
@@ -271,6 +324,7 @@
 </body>
 
 </html>
+
 
 
 
