@@ -1,105 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-	/* ===== THURSDAY cards like your screenshot (compact right-side thumbs) ===== */
-#thursday .all-projects {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
+/* ===== THURSDAY — vertical stack + posh heading ===== */
+
+/* 1) One clean vertical column (centered), consistent widths */
+#thursday .all-projects{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:18px;
+  position:relative;
 }
-@media (min-width: 768px) {
-  #thursday .all-projects { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  #thursday .all-projects { grid-template-columns: repeat(3, 1fr); }
+#thursday .project-item{
+  /* center each card and keep edges aligned */
+  max-width: 880px;
+  margin: 0 auto;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:24px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
 }
 
-#thursday .project-item {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 24px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+/* thumbnails stay small and never stretch */
+#thursday .project-img img{
+  width:80px !important;
+  height:80px !important;
+  max-width:none !important;
+  object-fit:cover;
+  border-radius:8px;
+  flex-shrink:0;
 }
 
-/* Kill any global "img {width:100%}" impact inside Thursday thumbnails */
-#thursday .project-img img {
-  width: 80px !important;
-  height: 80px !important;
-  max-width: none !important;
-  object-fit: cover;
-  border-radius: 8px;
-  flex-shrink: 0;          /* don't let the image stretch the card */
+/* 2) "Thursday Activity" — posh, merged feel (same colors) */
+#thursday .section-title{
+  text-align:center;
+  font-weight:900;
+  letter-spacing:-.015em;      /* slight “merged” tracking */
+  line-height:1.1;
+  margin-bottom:28px;
+  position:relative;
+  display:inline-block;
+  padding:6px 16px;
 }
 
-/* Typography polish (optional) */
-#thursday .project-info h1 { 
-  margin: 0 0 4px; 
-  font-size: 1.25rem; 
-  line-height: 1.2; 
-  color: #1f2937;       /* gray-800 */
-  font-weight: 700;
-}
-#thursday .project-info h2 { 
-  margin: 0 0 8px; 
-  color: #6b7280;       /* gray-500 */
-  font-weight: 600;
-}
-#thursday #menu { color: #4b5563; } /* gray-600 */
-#thursday #menu strong { color: #ef4444; } /* red-500 */
-
-	/* ===== Hover effects for Thursday cards ===== */
-#thursday .project-item {
-  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
-  will-change: transform, box-shadow;
-}
-#thursday .project-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(0,0,0,.12);
-  background-color: #f9fafb; /* subtle tint */
+/* subtle lines flanking the title */
+#thursday .section-title::before,
+#thursday .section-title::after{
+  content:"";
+  display:inline-block;
+  vertical-align:middle;
+  width:clamp(36px,7vw,80px);
+  height:2px;
+  background:rgba(0,0,0,.12);  /* neutral, doesn’t change your colors */
+  border-radius:2px;
+  margin:0 12px;
 }
 
-/* Slight zoom on the thumbnail */
-#thursday .project-img img {
-  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+/* elegant highlight “underpaint” only beneath the existing yellow span */
+#thursday .section-title span{
+  position:relative;
 }
-#thursday .project-item:hover .project-img img {
-  transform: scale(1.06);
-  box-shadow: 0 6px 14px rgba(0,0,0,.15);
-}
-
-/* Title underline + color on hover */
-#thursday .project-info h1 {
-  transition: color .18s ease, text-decoration-color .18s ease;
-  text-decoration: underline transparent;
-  text-underline-offset: 3px;
-}
-#thursday .project-item:hover .project-info h1 {
-  color: #111827; /* darker (gray-900) */
-  text-decoration-color: #f59e0b; /* amber underline */
+#thursday .section-title span::after{
+  content:"";
+  position:absolute;
+  left:-4px; right:-4px; bottom:3px;
+  height:.45em;
+  background:currentColor;     /* uses your existing yellow */
+  opacity:.18;                 /* soft, classy wash */
+  border-radius:6px;
+  z-index:-1;
 }
 
-/* Make the red alert pop a bit on hover (optional) */
-#thursday .project-item:hover #menu strong {
-  filter: saturate(1.15) brightness(1.05);
-}
-
-/* Focus styles for keyboard users */
-#thursday .project-item:focus-within {
-  outline: 3px solid #f59e0b;
-  outline-offset: 3px;
-  transform: translateY(-2px);
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  #thursday .project-item,
-  #thursday .project-img img,
-  #thursday .project-info h1 {
-    transition: none;
+/* Responsive: full-width on small screens */
+@media (max-width: 560px){
+  #thursday .project-item{
+    max-width: 100%;
+    padding:18px;
   }
 }
 
@@ -483,6 +462,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </body>
 
 </html>
+
 
 
 
