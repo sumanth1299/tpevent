@@ -260,6 +260,101 @@
   text-underline-offset: 6px;
 }
 
+    /* ===== WEDNESDAY Polished UI ===== */
+#wednesday.wed-day { padding: 60px 16px; background: #f7f8fb; }
+#wednesday .wed-wrap { max-width: 1100px; margin: 0 auto; }
+
+#wednesday .wed-title{
+  text-align:center; margin:0 0 26px; font-weight:900;
+  font-size:clamp(28px,4vw,40px); color:#0f172a;
+  letter-spacing:-.015em; line-height:1.1;
+}
+#wednesday .wed-title span{
+  color:#fcb900; position:relative;
+}
+#wednesday .wed-title span::after{
+  content:""; position:absolute; left:-4px; right:-4px; bottom:4px;
+  height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+}
+
+#wednesday .wed-grid{
+  display:grid; grid-template-columns:1fr; gap:20px;
+}
+@media (min-width: 860px){
+  #wednesday .wed-grid{ grid-template-columns:1fr 1fr; gap:24px; }
+}
+
+#wednesday .wed-card{
+  background:#fff; border-radius:16px; padding:18px;
+  box-shadow:0 10px 26px rgba(2,6,23,.07);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+#wednesday .wed-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 18px 40px rgba(2,6,23,.12);
+  background:#fafafa;
+}
+
+#wednesday .wed-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:12px;
+}
+#wednesday .wed-head-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+#wednesday .wed-head h2{
+  margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827;
+}
+#wednesday .wed-icon{
+  width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+  background:#fff7e0; color:#8a4b00; border:1px solid #ffd585;
+}
+
+/* Chips */
+#wednesday .time-chip{
+  display:inline-block; font-weight:700; color:#8b5a00;
+  background:#fff7e6; border:1px solid #ffd89a;
+  padding:6px 10px; border-radius:999px; white-space:nowrap;
+}
+#wednesday .status-chip{
+  display:inline-block; font-weight:700; color:#5b5b5b;
+  background:#f1f1f1; border:1px solid #e6e6e6;
+  padding:6px 10px; border-radius:999px; white-space:nowrap;
+}
+#wednesday .loc-chip{
+  display:inline-block; color:#1f2937; background:#fff;
+  border:1px dashed #cfcfcf; padding:4px 8px; border-radius:999px;
+}
+
+/* People list (In Office) */
+#wednesday .person-list{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
+#wednesday .person{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border:1px solid #ececec; border-radius:12px; background:#ffffff;
+}
+#wednesday .avatar{
+  width:36px; height:36px; border-radius:50%;
+  display:grid; place-items:center; font-weight:800;
+  color:#8a4b00; background:#fff3c4; border:1px solid #ffd585;
+  flex:0 0 auto;
+}
+#wednesday .meta .name{ font-weight:700; color:#111827; }
+#wednesday .meta .note{ font-size:.9rem; color:#6b7280; }
+
+/* Meetings list */
+#wednesday .meeting-list{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
+#wednesday .meeting{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+  padding:12px; border:1px solid #ececec; border-radius:12px; background:#ffffff;
+}
+#wednesday .meeting .who{ display:flex; align-items:center; gap:10px; min-width:0; }
+#wednesday .meeting .name{ font-weight:700; color:#111827; }
+#wednesday .meeting .details{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+
+/* Mobile polish */
+@media (max-width:560px){
+  #wednesday .meeting{ flex-direction:column; align-items:flex-start; }
+  #wednesday .wed-head{ flex-direction:column; align-items:flex-start; gap:8px; }
+}
+
 
   </style>
 </head>
@@ -306,7 +401,7 @@
     <div class="services container">
       <div class="timeline">
         <ul>
-          <li><div class="timeline-content"><h3 class="date">09:30 - 11:00 </h3><h1>Coffee with TransAlta &amp; Pembina</h1></div></li>
+          <li><div class="timeline-content"><h3 class="date">09:30 - 11:00 </h3><h1>TBD</h1></div></li>
           <li><div class="timeline-content"><h3 class="date">12:00 - 13:00</h3><h1>Lunch with OpenText folks</h1></div></li>
           <li><div class="timeline-content"><h3 class="date">13:30 - 17:00</h3><h1>Team One-on-One's with Tim</h1><p>loaction: small board room</p></div></li>
         </ul>
@@ -358,6 +453,104 @@
       </div>
     </div>
   </section>
+
+  <!-- WEDNESDAY -->
+<section id="wednesday" class="wed-day">
+  <div class="wed-wrap">
+    <h1 class="wed-title">Wednesday’s <span>Schedule</span></h1>
+
+    <div class="wed-grid">
+      <!-- In Office -->
+      <article class="wed-card">
+        <header class="wed-head">
+          <div class="wed-head-left">
+            <span class="wed-icon" aria-hidden="true">🏢</span>
+            <h2>In Office</h2>
+          </div>
+          <span class="time-chip">9:00 AM – 4:00 PM</span>
+        </header>
+
+        <ul class="person-list">
+          <li class="person">
+            <span class="avatar">SD</span>
+            <div class="meta">
+              <div class="name">Sumanth</div>
+              <div class="note">Working from office</div>
+            </div>
+          </li>
+          <li class="person">
+            <span class="avatar">C</span>
+            <div class="meta">
+              <div class="name">Charan</div>
+              <div class="note">Working from office</div>
+            </div>
+          </li>
+          <li class="person">
+            <span class="avatar">N</span>
+            <div class="meta">
+              <div class="name">Naveen</div>
+              <div class="note">Working from office</div>
+            </div>
+          </li>
+          <li class="person">
+            <span class="avatar">A</span>
+            <div class="meta">
+              <div class="name">Arlette</div>
+              <div class="note">Working from office</div>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Client Meetings -->
+      <article class="wed-card">
+        <header class="wed-head">
+          <div class="wed-head-left">
+            <span class="wed-icon" aria-hidden="true">📍</span>
+            <h2>Client Meetings (Different Locations)</h2>
+          </div>
+          <span class="status-chip">Times tentative</span>
+        </header>
+
+        <ul class="meeting-list">
+          <li class="meeting">
+            <div class="who">
+              <span class="avatar">T</span>
+              <span class="name">Tim</span>
+            </div>
+            <!-- Edit these times later when confirmed -->
+            <div class="details">
+              <span class="time-chip">10:15 – 11:00</span>
+              <span class="loc-chip">@ Client A (TBD)</span>
+            </div>
+          </li>
+          <li class="meeting">
+            <div class="who">
+              <span class="avatar">W</span>
+              <span class="name">Werner</span>
+            </div>
+            <div class="details">
+              <span class="time-chip">1:30 – 2:10</span>
+              <span class="loc-chip">@ Client B (TBD)</span>
+            </div>
+          </li>
+          <li class="meeting">
+            <div class="who">
+              <span class="avatar">A</span>
+              <span class="name">Ashley</span>
+            </div>
+            <div class="details">
+              <span class="time-chip">3:20 – 4:00</span>
+              <span class="loc-chip">@ Client C (TBD)</span>
+            </div>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- End WEDNESDAY -->
+
 
   <!-- THURSDAY -->
   <section id="thursday" class="py-12 bg-gray-50">
@@ -455,6 +648,7 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
 
 
 
