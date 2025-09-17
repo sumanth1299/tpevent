@@ -1,163 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-/* ===== THURSDAY — vertical stack + posh heading ===== */
-
-/* 1) One clean vertical column (centered), consistent widths */
-#thursday .all-projects{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:18px;
-  position:relative;
-}
-#thursday .project-item{
-  /* center each card and keep edges aligned */
-  max-width: 880px;
-  margin: 0 auto;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:16px;
-  padding:24px;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 6px 16px rgba(0,0,0,.08);
-}
-
-/* thumbnails stay small and never stretch */
-#thursday .project-img img{
-  width:80px !important;
-  height:80px !important;
-  max-width:none !important;
-  object-fit:cover;
-  border-radius:8px;
-  flex-shrink:0;
-}
-
-/* 2) "Thursday Activity" — posh, merged feel (same colors) */
-#thursday .section-title{
-  text-align:center;
-  font-weight:900;
-  letter-spacing:-.015em;      /* slight “merged” tracking */
-  line-height:1.1;
-  margin-bottom:28px;
-  position:relative;
-  display:inline-block;
-  padding:6px 16px;
-}
-
-/* subtle lines flanking the title */
-#thursday .section-title::before,
-#thursday .section-title::after{
-  content:"";
-  display:inline-block;
-  vertical-align:middle;
-  width:clamp(36px,7vw,80px);
-  height:2px;
-  background:rgba(0,0,0,.12);  /* neutral, doesn’t change your colors */
-  border-radius:2px;
-  margin:0 12px;
-}
-
-/* elegant highlight “underpaint” only beneath the existing yellow span */
-#thursday .section-title span{
-  position:relative;
-}
-#thursday .section-title span::after{
-  content:"";
-  position:absolute;
-  left:-4px; right:-4px; bottom:3px;
-  height:.45em;
-  background:currentColor;     /* uses your existing yellow */
-  opacity:.18;                 /* soft, classy wash */
-  border-radius:6px;
-  z-index:-1;
-}
-
-/* Responsive: full-width on small screens */
-@media (max-width: 560px){
-  #thursday .project-item{
-    max-width: 100%;
-    padding:18px;
-  }
-}
-
-	/* Only one day visible at a time */
-#monday, #tuesday, #wednesday, #thursday { display: none; }
-#monday.active, #tuesday.active, #wednesday.active, #thursday.active { display: block; }
-
-/* ===== Tuesday: Agenda Cards Rail ===== */
-#tuesday.tue-agenda{padding:60px 16px;background:#f6f7fb}
-#tuesday .tue-wrap{max-width:1100px;margin:0 auto}
-#tuesday .tue-title{
-  text-align:center;margin:0 0 28px;font-weight:800;
-  font-size:clamp(28px,4vw,40px);color:#0f172a
-}
-#tuesday .tue-title span{color:#f59e0b}
-
-#tuesday .tue-list{
-  display:grid;gap:18px;
-}
-@media(min-width:720px){
-  #tuesday .tue-list{gap:20px}
-}
-
-/* Card layout: slim time rail + content */
-#tuesday .tue-card{
-  display:grid;grid-template-columns:120px 1fr;gap:16px;
-  align-items:start;background:#fff;border-radius:16px;padding:18px;
-  box-shadow:0 10px 26px rgba(2,6,23,.07);
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-}
-@media(max-width:560px){
-  #tuesday .tue-card{grid-template-columns:1fr}
-}
-#tuesday .tue-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 18px 40px rgba(2,6,23,.12);
-  background:#fafafa;
-}
-
-/* Time rail */
-#tuesday .tue-time{display:flex;align-items:flex-start;justify-content:flex-start}
-#tuesday .tue-chip{
-  display:inline-block;padding:8px 12px;border-radius:999px;
-  font-weight:700;background:#fff7e6;border:1px solid #ffd89a;color:#8b5a00
-}
-#tuesday .tue-chip::before{
-  content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.22);margin-right:8px
-}
-
-/* Content */
-#tuesday .tue-head{
-  margin:0 0 6px;font-size:clamp(18px,2.6vw,22px);font-weight:800;color:#111827;
-  display:flex;align-items:center;gap:10px
-}
-#tuesday .tue-ico{
-  width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
-  background:#fff3c4;color:#8a4b00;border:1px solid #ffd585
-}
-#tuesday .tue-points{margin:8px 0 0 0;padding-left:18px;color:#374151;line-height:1.55}
-#tuesday .tue-points li{margin:6px 0}
-#tuesday .tue-note{margin:2px 0 0;color:#374151}
-
-/* Keyboard users */
-#tuesday .tue-card:focus-within{outline:3px solid #f59e0b;outline-offset:4px}
-
-/* Reduced motion */
-@media(prefers-reduced-motion:reduce){
-  #tuesday .tue-card{transition:none}
-}
-
-
-
-</style>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
   <title>My Website</title>
+
+  <style>
+    /* Global mobile safety */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* Only one day visible at a time */
+    #monday, #tuesday, #wednesday, #thursday { display: none; }
+    #monday.active, #tuesday.active, #wednesday.active, #thursday.active { display: block; }
+
+    /* ===== Tuesday: Agenda Cards Rail ===== */
+    #tuesday.tue-agenda{padding:60px 16px;background:#f6f7fb}
+    #tuesday .tue-wrap{max-width:1100px;margin:0 auto}
+    #tuesday .tue-title{
+      text-align:center;margin:0 0 28px;font-weight:800;
+      font-size:clamp(28px,4vw,40px);color:#0f172a
+    }
+    #tuesday .tue-title span{color:#f59e0b}
+    #tuesday .tue-list{display:grid;gap:18px}
+    @media(min-width:720px){ #tuesday .tue-list{gap:20px} }
+    #tuesday .tue-card{
+      display:grid;grid-template-columns:120px 1fr;gap:16px;
+      align-items:start;background:#fff;border-radius:16px;padding:18px;
+      box-shadow:0 10px 26px rgba(2,6,23,.07);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    @media(max-width:560px){ #tuesday .tue-card{grid-template-columns:1fr} }
+    #tuesday .tue-card:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
+    #tuesday .tue-time{display:flex;align-items:flex-start;justify-content:flex-start}
+    #tuesday .tue-chip{
+      display:inline-block;padding:8px 12px;border-radius:999px;
+      font-weight:700;background:#fff7e6;border:1px solid #ffd89a;color:#8b5a00
+    }
+    #tuesday .tue-chip::before{
+      content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+      background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.22);margin-right:8px
+    }
+    #tuesday .tue-head{
+      margin:0 0 6px;font-size:clamp(18px,2.6vw,22px);font-weight:800;color:#111827;
+      display:flex;align-items:center;gap:10px
+    }
+    #tuesday .tue-ico{
+      width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+      background:#fff3c4;color:#8a4b00;border:1px solid #ffd585
+    }
+    #tuesday .tue-points{margin:8px 0 0 0;padding-left:18px;color:#374151;line-height:1.55}
+    #tuesday .tue-points li{margin:6px 0}
+    #tuesday .tue-note{margin:2px 0 0;color:#374151}
+    #tuesday .tue-card:focus-within{outline:3px solid #f59e0b;outline-offset:4px}
+    @media(prefers-reduced-motion:reduce){ #tuesday .tue-card{transition:none} }
+
+    /* ===== THURSDAY — vertical stack + posh heading ===== */
+
+    /* 1) One clean vertical column (centered), consistent widths */
+    #thursday .all-projects{
+      display:flex !important;
+      flex-direction:column !important;
+      gap:18px;
+      position:relative;
+      padding:0 12px;            /* breathing room on phones */
+    }
+    #thursday .project-item{
+      max-width: 880px;
+      margin: 0 auto;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding:24px;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+    }
+
+    /* allow text to wrap on tiny screens (prevents sideways scroll) */
+    #thursday .project-info{ min-width:0; flex:1 1 auto; }
+    #thursday .project-info h1,
+    #thursday .project-info h2,
+    #thursday .project-info p{ overflow-wrap:anywhere; word-break:break-word; margin:0 0 6px; }
+
+    /* thumbnails stay small and never stretch */
+    #thursday .project-img{ flex:0 0 auto; }
+    #thursday .project-img img{
+      width:80px !important;
+      height:80px !important;
+      max-width:none !important;
+      object-fit:cover;
+      border-radius:8px;
+      display:block;
+    }
+
+    /* 2) "Thursday Activity" — posh, merged feel (same colors) */
+    #thursday .section-title{
+      text-align:center;
+      font-weight:900;
+      letter-spacing:-.015em;
+      line-height:1.1;
+      margin-bottom:28px;
+      position:relative;
+      display:inline-block;
+      padding:6px 16px;
+    }
+    #thursday .section-title::before,
+    #thursday .section-title::after{
+      content:"";
+      display:inline-block;
+      vertical-align:middle;
+      width:clamp(28px,7vw,80px);
+      height:2px;
+      background:rgba(0,0,0,.12);
+      border-radius:2px;
+      margin:0 12px;
+    }
+    #thursday .section-title span{ position:relative; }
+    #thursday .section-title span::after{
+      content:"";
+      position:absolute; left:-4px; right:-4px; bottom:3px;
+      height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 600px){
+      #thursday .project-item{ max-width:100%; padding:16px; gap:12px; }
+      #thursday .project-img img{ width:56px !important; height:56px !important; }
+      #thursday .section-title{ padding:6px 10px; }
+      #thursday .section-title::before,
+      #thursday .section-title::after{ width:clamp(18px,10vw,48px); }
+    }
+  </style>
 </head>
 
 <body>
@@ -171,26 +147,20 @@
           </a>
         </div>
         <div class="nav-list">
-          <div class="hamburger">
-            <div class="bar"></div>
-          </div>
+          <div class="hamburger"><div class="bar"></div></div>
           <ul>
             <li><a href="#hero" data-after="Home">Home</a></li>
-			<li><a href="#monday">MONDAY</a></li>
+            <li><a href="#monday">MONDAY</a></li>
             <li><a href="#tuesday">TUESDAY</a></li>
             <li><a href="#wednesday">WEDNESDAY</a></li>
             <li><a href="#thursday">THURSDAY</a></li>
-
-
           </ul>
         </div>
       </div>
     </div>
   </section>
-  <!-- End Header -->
 
-
-  <!-- Hero Section  -->
+  <!-- Hero Section -->
   <section id="hero">
     <div class="hero container">
       <div>
@@ -201,290 +171,159 @@
       </div>
     </div>
   </section>
-  <!-- End Hero Section  -->
 
-  <!-- Service Section -->
+  <!-- Monday (kept as-is) -->
   <section id="monday">
-  <h1 class="section-title" style="padding-top: 15px;">Monday's <span>Plan</span></h1>
+    <h1 class="section-title" style="padding-top: 15px;">Monday's <span>Plan</span></h1>
     <div class="services container">
-     <div class="timeline">
-    <ul>
-      <li>
-        <div class="timeline-content">
-          <h3 class="date">09:30 - 11:00 </h3>
-          <h1>Coffee with TransAlta &amp; Pembina</h1>
-          
-        </div>
-      </li>
-      <li>
-        <div class="timeline-content">
-          <h3 class="date">12:00 - 13:00</h3>
-          <h1>Lunch with OpenText folks</h1>
-        </div>
-      </li>
-      <li>
-        <div class="timeline-content">
-          <h3 class="date">13:30 - 17:00</h3>
-          <h1>Team One-on-One's with Tim</h1>
-			<p>loaction: small board room</p>
-        </div>
-      </li>      
-	
-    </ul>
-  </div>
+      <div class="timeline">
+        <ul>
+          <li><div class="timeline-content"><h3 class="date">09:30 - 11:00 </h3><h1>Coffee with TransAlta &amp; Pembina</h1></div></li>
+          <li><div class="timeline-content"><h3 class="date">12:00 - 13:00</h3><h1>Lunch with OpenText folks</h1></div></li>
+          <li><div class="timeline-content"><h3 class="date">13:30 - 17:00</h3><h1>Team One-on-One's with Tim</h1><p>loaction: small board room</p></div></li>
+        </ul>
+      </div>
     </div>
   </section>
-  <!-- End Service Section -->
 
-<!-- TUESDAY — Agenda Cards Rail -->
-<section id="tuesday" class="tue-agenda">
-  <div class="tue-wrap">
-    <h1 class="tue-title">Tuesday's <span>Activities</span></h1>
+  <!-- TUESDAY — Agenda Cards Rail -->
+  <section id="tuesday" class="tue-agenda">
+    <div class="tue-wrap">
+      <h1 class="tue-title">Tuesday's <span>Activities</span></h1>
+      <div class="tue-list">
+        <article class="tue-card">
+          <div class="tue-time"><span class="tue-chip">9:00 AM – 12:00 PM</span></div>
+          <div class="tue-body">
+            <h2 class="tue-head"><span class="tue-ico" aria-hidden="true">📅</span>Morning Session</h2>
+            <ul class="tue-points">
+              <li>Overview of Projects YTD</li>
+              <li>Charan, Naveen & Arlette on ‘Working with Europe’</li>
+            </ul>
+          </div>
+        </article>
 
-    <div class="tue-list">
-      <!-- 9:00 – 4:00 -->
-      <article class="tue-card">
-        <div class="tue-time">
-          <span class="tue-chip">9:00 AM – 12:00 PM</span>
-        </div>
-        <div class="tue-body">
-          <h2 class="tue-head">
-            <span class="tue-ico" aria-hidden="true">📅</span>
-            Morning Session
-          </h2>
-          <ul class="tue-points">
-            <li>Overview of Projects YTD</li>
-            <li>Charan, Naveen & Arlette on ‘Working with Europe’</li>          
-          </ul>
-        </div>
-      </article>
+        <article class="tue-card">
+          <div class="tue-time"><span class="tue-chip">Lunch</span></div>
+          <div class="tue-body">
+            <h2 class="tue-head"><span class="tue-ico" aria-hidden="true">🍽️</span>Lunch</h2>
+            <p class="tue-note">12:00 PM - 1:00 PM</p>
+          </div>
+        </article>
 
-      <!-- 12:00 - Lunch -->
-      <article class="tue-card">
-        <div class="tue-time">
-          <span class="tue-chip">Lunch</span>
-        </div>
-        <div class="tue-body">
-          <h2 class="tue-head">
-            <span class="tue-ico" aria-hidden="true">🍽️</span>
-            Lunch
-          </h2>
-          <p class="tue-note">12:00 PM - 1:00 PM</p>
-        </div>
-      </article>
+        <article class="tue-card">
+          <div class="tue-time"><span class="tue-chip">1:00 PM – 4:00 PM</span></div>
+          <div class="tue-body">
+            <h2 class="tue-head"><span class="tue-ico" aria-hidden="true">📅</span>Afternoon Session</h2>
+            <ul class="tue-points">
+              <li>Sales Plan</li>
+              <li>Overview of Projects YTD</li>
+            </ul>
+          </div>
+        </article>
 
-		<article class="tue-card">
-        <div class="tue-time">
-          <span class="tue-chip">1:00 PM – 4:00 PM</span>
-        </div>
-        <div class="tue-body">
-          <h2 class="tue-head">
-            <span class="tue-ico" aria-hidden="true">📅</span>
-            Afternoon Session
-          </h2>
-          <ul class="tue-points">
-            <li>Sales Plan</li>
-            <li>Overview of Projects YTD</li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Team Dinner -->
-      <article class="tue-card">
-        <div class="tue-time">
-          <span class="tue-chip">TBD</span>
-        </div>
-        <div class="tue-body">
-          <h2 class="tue-head">
-            <span class="tue-ico" aria-hidden="true">🍲</span>
-            Team Dinner
-          </h2>
-        </div>
-      </article>
+        <article class="tue-card">
+          <div class="tue-time"><span class="tue-chip">TBD</span></div>
+          <div class="tue-body">
+            <h2 class="tue-head"><span class="tue-ico" aria-hidden="true">🍲</span>Team Dinner</h2>
+          </div>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- THURSDAY -->
+  <section id="thursday" class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">
+        Thursday <span class="text-yellow-500">Activity</span>
+      </h1>
 
-
-<!-- THURSDAY Section (compact thumbs, right-aligned) -->
-<section id="thursday" class="py-12 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">
-      Thursday <span class="text-yellow-500">Activity</span>
-    </h1>
-
-    <div class="all-projects grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Nose Hill Hike -->
-      <div class="project-item card bg-white p-6 rounded-lg shadow-md flex items-start justify-between gap-4">
-        <div class="project-info flex-1">
-          <h1 class="text-xl font-bold text-gray-800">Nose Hill Hike</h1>
-          <h2 class="text-gray-500 font-semibold">10:00 AM - 11:30 AM</h2>
-          <p id="menu" class="text-gray-600">
-            <strong class="text-red-500">! Reach Nose Hill by 10:00 AM</strong><br>
-            Address: TBD, Calgary, Alberta
-          </p>
+      <div class="all-projects">
+        <div class="project-item card">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Nose Hill Hike</h1>
+            <h2 class="text-gray-500 font-semibold">10:00 AM - 11:30 AM</h2>
+            <p id="menu" class="text-gray-600">
+              <strong class="text-red-500">! Reach Nose Hill by 10:00 AM</strong><br>
+              Address: TBD, Calgary, Alberta
+            </p>
+          </div>
+          <div class="project-img">
+            <img src="https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjMxODgxODcvZGQ4N2U2NDRiY2I1YWNiNzBjNDcwZWU3NmE3OGFiMjIuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==" alt="img" width="80" height="80" loading="lazy" />
+          </div>
         </div>
-        <div class="project-img shrink-0 self-center">
-          <img
-            src="https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjMxODgxODcvZGQ4N2U2NDRiY2I1YWNiNzBjNDcwZWU3NmE3OGFiMjIuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ=="
-            alt="img"
-            class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-md"
-            width="80" height="80" loading="lazy"
-          />
-        </div>
-      </div>
 
-      <!-- Bowling -->
-      <div class="project-item card bg-white p-6 rounded-lg shadow-md flex items-start justify-between gap-4">
-        <div class="project-info flex-1">
-          <h1 class="text-xl font-bold text-gray-800">Bowling</h1>
-          <h2 class="text-gray-500 font-semibold">2:00 PM - 4:25 PM</h2>
-          <p id="menu" class="text-gray-600">
-            Address: 2916 5th Ave NE Calgary,AB T2A 6K4
-          </p>
+        <div class="project-item card">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Bowling</h1>
+            <h2 class="text-gray-500 font-semibold">2:00 PM - 4:25 PM</h2>
+            <p id="menu" class="text-gray-600">Address: 2916 5th Ave NE Calgary,AB T2A 6K4</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/bowl.jpg" alt="img" width="80" height="80" loading="lazy" />
+          </div>
         </div>
-        <div class="project-img shrink-0 self-center">
-          <img
-            src="./img/bowl.jpg"
-            alt="img"
-            class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-md"
-            width="80" height="80" loading="lazy"
-          />
-        </div>
-      </div>
 
-      <!-- Axe Throwing -->
-      <div class="project-item card bg-white p-6 rounded-lg shadow-md flex items-start justify-between gap-4">
-        <div class="project-info flex-1">
-          <h1 class="text-xl font-bold text-gray-800">Axe Throwing</h1>
-          <h2 class="text-gray-500 font-semibold">5:00 PM - 6:00 PM</h2>
-          <p id="menu" class="text-gray-600">
-            Address: 2015 32 Ave NE #23, Calgary, AB T2E 6Z3
-          </p>
+        <div class="project-item card">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Axe Throwing</h1>
+            <h2 class="text-gray-500 font-semibold">5:00 PM - 6:00 PM</h2>
+            <p id="menu" class="text-gray-600">Address: 2015 32 Ave NE #23, Calgary, AB T2E 6Z3</p>
+          </div>
+          <div class="project-img">
+            <img src="https://as1.ftcdn.net/v2/jpg/03/00/75/10/1000_F_300751098_IDyIRUjaQVsfNwHHfCGB8zMpOtC6qriy.jpg" alt="img" width="80" height="80" loading="lazy" />
+          </div>
         </div>
-        <div class="project-img shrink-0 self-center">
-          <img
-            src="https://as1.ftcdn.net/v2/jpg/03/00/75/10/1000_F_300751098_IDyIRUjaQVsfNwHHfCGB8zMpOtC6qriy.jpg"
-            alt="img"
-            class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-md"
-            width="80" height="80" loading="lazy"
-          />
+
+        <div class="project-item card">
+          <div class="project-info">
+            <h1 class="text-xl font-bold text-gray-800">Dinner at  Hitchki</h1>
+            <h2 class="text-gray-500 font-semibold">6:30 PM - 8:30 PM</h2>
+            <p id="menu" class="text-gray-600">Address: 1155 Cornerstone Blvd NE, Calgary, AB T3N 1A9</p>
+          </div>
+          <div class="project-img">
+            <img src="./img/dinner.jpg" alt="img" width="80" height="80" loading="lazy" />
+          </div>
         </div>
       </div>
-
-      <!-- Dinner at Hitchki -->
-      <div class="project-item card bg-white p-6 rounded-lg shadow-md flex items-start justify-between gap-4">
-        <div class="project-info flex-1">
-          <h1 class="text-xl font-bold text-gray-800">Dinner at  Hitchki</h1>
-          <h2 class="text-gray-500 font-semibold">6:30 PM - 8:30 PM</h2>
-          <p id="menu" class="text-gray-600">
-            Address: 1155 Cornerstone Blvd NE, Calgary, AB T3N 1A9
-          </p>
-        </div>
-        <div class="project-img shrink-0 self-center">
-          <img
-            src="./img/dinner.jpg"
-            alt="img"
-            class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-md"
-            width="80" height="80" loading="lazy"
-          />
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
-<!-- End THURSDAY Section -->
+  </section>
 
   <!-- Footer -->
   <section id="footer">
     <div class="footer container">
-      <div class="brand">
-        <h1><span>T</span>urnpikes</h1>
-      </div>
+      <div class="brand"><h1><span>T</span>urnpikes</h1></div>
       <h2><b><span style="color: #fcb900;">Experience saves money -</span> the embarrassing photos are free!</b></h2>
       <div class="social-icon">
-        <div class="social-item">
-          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a>
-        </div>
-        <div class="social-item">
-          <a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a>
-        </div>
-        
+        <div class="social-item"><a href="#"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png" /></a></div>
+        <div class="social-item"><a href="#"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" /></a></div>
       </div>
       <p>Copyright © 2024 turnpikes. All rights reserved</p>
     </div>
   </section>
-  <!-- End Footer -->
-	 <!-- Day Switcher -->
+
+  <!-- Day Switcher -->
   <script>
-document.addEventListener('DOMContentLoaded', function () {
-  // IDs we intend to toggle
-  const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday'];
+    document.addEventListener('DOMContentLoaded', function () {
+      const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday'];
+      const sections = DAY_IDS.map(id => document.querySelector(id)).filter(Boolean);
+      const links = Array.from(document.querySelectorAll('#header .nav-list a'))
+        .filter(a => DAY_IDS.includes(a.getAttribute('href')));
 
-  // Collect only sections that actually exist in the DOM
-  const sections = DAY_IDS
-    .map(id => document.querySelector(id))
-    .filter(Boolean);
-
-  // Make nav links point to the same IDs (only attach to matching ones)
-  const links = Array.from(document.querySelectorAll('#header .nav-list a'))
-    .filter(a => DAY_IDS.includes(a.getAttribute('href')));
-
-  function show(id) {
-    sections.forEach(s => s.classList.toggle('active', ('#' + s.id) === id));
-    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-    const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    try { history.replaceState(null, '', id); } catch (e) {}
-  }
-
-  // Wire up clicks
-  links.forEach(a => {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      show(a.getAttribute('href'));
+      function show(id) {
+        sections.forEach(s => s.classList.toggle('active', ('#' + s.id) === id));
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+        const el = document.querySelector(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        try { history.replaceState(null, '', id); } catch (e) {}
+      }
+      links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(a.getAttribute('href')); }));
+      const start = DAY_IDS.includes(location.hash) && document.querySelector(location.hash)
+        ? location.hash : (sections[0] ? ('#' + sections[0].id) : '#thursday');
+      show(start);
     });
-  });
-
-  // Initial view: URL hash if valid, otherwise first existing day (or thursday if present)
-  const start = DAY_IDS.includes(location.hash) && document.querySelector(location.hash)
-    ? location.hash
-    : (sections[0] ? ('#' + sections[0].id) : '#thursday');
-
-  show(start);
-});
-</script>
+  </script>
 
   <script src="./app.js"></script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
