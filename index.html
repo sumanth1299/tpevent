@@ -56,9 +56,6 @@
     #tuesday .tue-card:focus-within{outline:3px solid #f59e0b;outline-offset:4px}
     @media(prefers-reduced-motion:reduce){ #tuesday .tue-card{transition:none} }
 
-    /* ===== THURSDAY — vertical stack + posh heading ===== */
-
-    /* 1) One clean vertical column (centered), consistent widths */
     #thursday .all-projects{
       display:flex !important;
       flex-direction:column !important;
@@ -134,7 +131,6 @@
       #thursday .section-title::after{ width:clamp(18px,10vw,48px); }
     }
 
-    /* ===== Thursday: mobile stack (heading on top, cards below) ===== */
 @media (max-width: 768px) {
   /* Make the Thursday wrapper a single column */
   #thursday > .container{
@@ -185,6 +181,61 @@
     margin: 0 0 6px;
   }
 }
+
+/* base transitions */
+#thursday .project-item{
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+  will-change: transform, box-shadow;
+}
+#thursday .project-img img{
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+/* desktop/trackpad hover */
+@media (hover:hover) and (pointer:fine){
+  #thursday .project-item:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.14);
+    background-color: #f9fafb;  /* subtle tint */
+  }
+  #thursday .project-item:hover .project-img img{
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px rgba(0,0,0,.18);
+  }
+  /* make the main title feel interactive without changing colors */
+  #thursday .project-item:hover .project-info h1{
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+  /* nudge the red alert a bit */
+  #thursday .project-item:hover #menu strong{
+    filter: saturate(1.12) brightness(1.04);
+  }
+}
+
+/* keyboard accessibility */
+#thursday .project-item:focus-within{
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+  transform: translateY(-2px);
+}
+
+/* touch feedback (phones/tablets) */
+@media (hover:none){
+  #thursday .project-item:active{
+    transform: scale(0.99);
+  }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #thursday .project-item,
+  #thursday .project-img img{
+    transition: none;
+  }
+}
+
 
   </style>
 </head>
@@ -380,4 +431,5 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
 
