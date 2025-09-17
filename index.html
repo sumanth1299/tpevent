@@ -103,6 +103,10 @@
   }
 }
 
+	/* Only one day visible at a time */
+#monday, #tuesday, #wednesday, #thursday { display: none; }
+#monday.active, #tuesday.active, #wednesday.active, #thursday.active { display: block; }
+
 
 </style>
 <head>
@@ -128,10 +132,11 @@
           </div>
           <ul>
             <li><a href="#hero" data-after="Home">Home</a></li>
-			<li><a href="#services" data-after="Service">MONDAY</a></li>
-            <li><a href="#projects" data-after="Projects">TUESDAY</a></li>
-            <li><a href="#services" data-after="Service">WEDNESDAY</a></li>
-            <li><a href="#projects" data-after="Projects">THURSDAY</a></li>
+			<li><a href="#monday">MONDAY</a></li>
+            <li><a href="#tuesday">TUESDAY</a></li>
+            <li><a href="#wednesday">WEDNESDAY</a></li>
+            <li><a href="#thursday">THURSDAY</a></li>
+
 
           </ul>
         </div>
@@ -155,7 +160,7 @@
   <!-- End Hero Section  -->
 
   <!-- Service Section -->
-  <section id="services">
+  <section id="monday">
   <h1 class="section-title" style="padding-top: 15px;">Friday's <span>Plan</span></h1>
     <div class="services container">
      <div class="timeline">
@@ -300,30 +305,49 @@
   <!-- End Footer -->
 	 <!-- Day Switcher -->
   <script>
-    (function () {
-      const valid = ['#monday', '#tuesday', '#wednesday', '#thursday'];
-      const links = document.querySelectorAll('#header .nav-list a[href^="#"]');
-      const sections = valid.map(id => document.querySelector(id)).filter(Boolean);
+document.addEventListener('DOMContentLoaded', function () {
+  // IDs we intend to toggle
+  const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday'];
 
-      function show(id){
-        sections.forEach(s => s.classList.toggle('active', '#'+s.id === id));
-        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-        if(id !== '#hero'){ document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'}); }
-        try{ history.replaceState(null,'',id); }catch(e){}
-      }
-      links.forEach(a=>{
-        const href = a.getAttribute('href');
-        if (valid.includes(href)){
-          a.addEventListener('click', (e)=>{ e.preventDefault(); show(href); });
-        }
-      });
-      show(valid.includes(location.hash) ? location.hash : '#monday');
-    })();
-  </script>
+  // Collect only sections that actually exist in the DOM
+  const sections = DAY_IDS
+    .map(id => document.querySelector(id))
+    .filter(Boolean);
+
+  // Make nav links point to the same IDs (only attach to matching ones)
+  const links = Array.from(document.querySelectorAll('#header .nav-list a'))
+    .filter(a => DAY_IDS.includes(a.getAttribute('href')));
+
+  function show(id) {
+    sections.forEach(s => s.classList.toggle('active', ('#' + s.id) === id));
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+    const el = document.querySelector(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    try { history.replaceState(null, '', id); } catch (e) {}
+  }
+
+  // Wire up clicks
+  links.forEach(a => {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      show(a.getAttribute('href'));
+    });
+  });
+
+  // Initial view: URL hash if valid, otherwise first existing day (or thursday if present)
+  const start = DAY_IDS.includes(location.hash) && document.querySelector(location.hash)
+    ? location.hash
+    : (sections[0] ? ('#' + sections[0].id) : '#thursday');
+
+  show(start);
+});
+</script>
+
   <script src="./app.js"></script>
 </body>
 
 </html>
+
 
 
 
