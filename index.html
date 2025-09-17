@@ -235,6 +235,23 @@
     transition: none;
   }
 }
+/* Thursday card title underline color on hover */
+@media (hover:hover) and (pointer:fine){
+  #thursday .project-item:hover .project-info h1{
+    text-decoration: underline;
+    text-decoration-color: #fcb900;   /* your color */
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+}
+
+/* Match the keyboard focus style too (optional) */
+#thursday .project-item:focus-within .project-info h1{
+  text-decoration: underline;
+  text-decoration-color: #fcb900;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
 
 
   </style>
@@ -431,6 +448,7 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
 
 
 
