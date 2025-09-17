@@ -260,101 +260,132 @@
   text-underline-offset: 6px;
 }
 
-    /* ===== WEDNESDAY Polished UI ===== */
-#wednesday.wed-day { padding: 60px 16px; background: #f7f8fb; }
+/* ===== WEDNESDAY — Posh Dual Layout (Office + Journey) ===== */
+#wednesday.wed-posh { padding: 60px 16px; background: #f7f8fb; }
 #wednesday .wed-wrap { max-width: 1100px; margin: 0 auto; }
 
+/* Title with classy amber underpaint */
 #wednesday .wed-title{
   text-align:center; margin:0 0 26px; font-weight:900;
-  font-size:clamp(28px,4vw,40px); color:#0f172a;
-  letter-spacing:-.015em; line-height:1.1;
+  font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
 }
-#wednesday .wed-title span{
-  color:#fcb900; position:relative;
-}
+#wednesday .wed-title span{ color:#fcb900; position:relative; }
 #wednesday .wed-title span::after{
-  content:""; position:absolute; left:-4px; right:-4px; bottom:4px;
+  content:""; position:absolute; inset:auto -6px 4px -6px;
   height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
 }
 
-#wednesday .wed-grid{
-  display:grid; grid-template-columns:1fr; gap:20px;
-}
-@media (min-width: 860px){
-  #wednesday .wed-grid{ grid-template-columns:1fr 1fr; gap:24px; }
-}
+/* Two responsive columns */
+#wednesday .wed-grid{ display:grid; grid-template-columns:1fr; gap:22px; }
+@media (min-width: 960px){ #wednesday .wed-grid{ grid-template-columns:1fr 1fr; } }
 
-#wednesday .wed-card{
+/* Card-style slab for In Office */
+#wednesday .wed-slab{
   background:#fff; border-radius:16px; padding:18px;
   box-shadow:0 10px 26px rgba(2,6,23,.07);
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-#wednesday .wed-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 18px 40px rgba(2,6,23,.12);
-  background:#fafafa;
-}
+#wednesday .wed-slab:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
 
-#wednesday .wed-head{
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  margin-bottom:12px;
+#wednesday .wed-slab-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
 }
-#wednesday .wed-head-left{ display:flex; align-items:center; gap:10px; min-width:0; }
-#wednesday .wed-head h2{
-  margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827;
-}
-#wednesday .wed-icon{
+#wednesday .wed-slab-head .left{ display:flex; align-items:center; gap:10px; }
+#wednesday .wed-slab h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+#wednesday .ico{
   width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
   background:#fff7e0; color:#8a4b00; border:1px solid #ffd585;
 }
 
 /* Chips */
-#wednesday .time-chip{
-  display:inline-block; font-weight:700; color:#8b5a00;
-  background:#fff7e6; border:1px solid #ffd89a;
-  padding:6px 10px; border-radius:999px; white-space:nowrap;
+#wednesday .chip{
+  display:inline-block; border-radius:999px; white-space:nowrap; font-weight:700;
+  padding:6px 10px;
 }
-#wednesday .status-chip{
-  display:inline-block; font-weight:700; color:#5b5b5b;
-  background:#f1f1f1; border:1px solid #e6e6e6;
-  padding:6px 10px; border-radius:999px; white-space:nowrap;
-}
-#wednesday .loc-chip{
-  display:inline-block; color:#1f2937; background:#fff;
-  border:1px dashed #cfcfcf; padding:4px 8px; border-radius:999px;
-}
+#wednesday .chip.time{ color:#8b5a00; background:#fff7e6; border:1px solid #ffd89a; }
+#wednesday .chip.status{ color:#5b5b5b; background:#f1f1f1; border:1px solid #e6e6e6; }
+#wednesday .chip.loc{ color:#1f2937; background:#fff; border:1px dashed #cfcfcf; }
 
-/* People list (In Office) */
-#wednesday .person-list{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
+/* Roster list */
+#wednesday .roster{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
 #wednesday .person{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px; border:1px solid #ececec; border-radius:12px; background:#ffffff;
+  display:flex; align-items:center; gap:10px; padding:10px 12px;
+  border:1px solid #ececec; border-radius:12px; background:#ffffff;
 }
 #wednesday .avatar{
-  width:36px; height:36px; border-radius:50%;
-  display:grid; place-items:center; font-weight:800;
-  color:#8a4b00; background:#fff3c4; border:1px solid #ffd585;
-  flex:0 0 auto;
+  width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+  font-weight:800; color:#8a4b00; background:#fff3c4; border:1px solid #ffd585; flex:0 0 auto;
 }
 #wednesday .meta .name{ font-weight:700; color:#111827; }
 #wednesday .meta .note{ font-size:.9rem; color:#6b7280; }
 
-/* Meetings list */
-#wednesday .meeting-list{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
-#wednesday .meeting{
-  display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
-  padding:12px; border:1px solid #ececec; border-radius:12px; background:#ffffff;
+/* Journey (one continuous line, horizontally scrollable on small screens) */
+#wednesday .wed-journey{
+  background:#fff; border-radius:16px; padding:18px;
+  box-shadow:0 10px 26px rgba(2,6,23,.07);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-#wednesday .meeting .who{ display:flex; align-items:center; gap:10px; min-width:0; }
-#wednesday .meeting .name{ font-weight:700; color:#111827; }
-#wednesday .meeting .details{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+#wednesday .wed-journey:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
 
-/* Mobile polish */
-@media (max-width:560px){
-  #wednesday .meeting{ flex-direction:column; align-items:flex-start; }
-  #wednesday .wed-head{ flex-direction:column; align-items:flex-start; gap:8px; }
+#wednesday .wed-journey-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px;
+}
+#wednesday .wed-journey-head .left{ display:flex; align-items:center; gap:10px; }
+#wednesday .wed-journey h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+#wednesday .crew{ margin:4px 0 12px; color:#374151; }
+
+/* The journey ribbon */
+#wednesday .journey{
+  position:relative;
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(160px, 1fr);
+  gap:18px;
+  padding:18px 10px 6px;
+  overflow-x:auto; overflow-y:hidden;
+  scrollbar-width:thin;
+}
+#wednesday .journey::before{
+  /* the connecting line */
+  content:"";
+  position:absolute; left:10px; right:10px; top:42px;
+  height:3px; background:linear-gradient(90deg, #fcb900, #ffe083);
+  border-radius:3px; opacity:.9;
 }
 
+#wednesday .stop{
+  position:relative; z-index:1; min-width:0;
+  display:grid; gap:8px; align-content:start;
+}
+#wednesday .stop .dot{
+  width:16px; height:16px; border-radius:50%;
+  background:#fff; border:4px solid #fcb900; margin-left:2px;
+  box-shadow:0 0 0 3px rgba(252,185,0,.2);
+}
+#wednesday .stop .label .what{ font-weight:800; color:#111827; margin-bottom:2px; }
+#wednesday .stop .meta{ display:flex; flex-wrap:wrap; gap:6px; }
+
+@media (max-width:640px){
+  #wednesday .journey{ grid-auto-columns:minmax(140px, 1fr); gap:14px; }
+  #wednesday .journey::before{ top:38px; }
+}
+
+/* Hover polish */
+@media (hover:hover) and (pointer:fine){
+  #wednesday .stop:hover .what{
+    text-decoration:underline;
+    text-decoration-color:#fcb900;
+    text-underline-offset:3px;
+    text-decoration-thickness:2px;
+  }
+}
+
+/* Accessibility + reduced motion */
+#wednesday .wed-slab:focus-within,
+#wednesday .wed-journey:focus-within{ outline:3px solid #fcb900; outline-offset:4px; }
+@media (prefers-reduced-motion:reduce){
+  #wednesday .wed-slab, #wednesday .wed-journey{ transition:none; }
+}
 
   </style>
 </head>
@@ -454,23 +485,23 @@
     </div>
   </section>
 
-  <!-- WEDNESDAY -->
-<section id="wednesday" class="wed-day">
+<!-- WEDNESDAY -->
+<section id="wednesday" class="wed-posh">
   <div class="wed-wrap">
     <h1 class="wed-title">Wednesday’s <span>Schedule</span></h1>
 
     <div class="wed-grid">
-      <!-- In Office -->
-      <article class="wed-card">
-        <header class="wed-head">
-          <div class="wed-head-left">
-            <span class="wed-icon" aria-hidden="true">🏢</span>
+      <!-- A) In Office -->
+      <article class="wed-slab">
+        <header class="wed-slab-head">
+          <div class="left">
+            <span class="ico" aria-hidden="true">🏢</span>
             <h2>In Office</h2>
           </div>
-          <span class="time-chip">9:00 AM – 4:00 PM</span>
+          <span class="chip time">9:00 AM – 4:00 PM</span>
         </header>
 
-        <ul class="person-list">
+        <ul class="roster">
           <li class="person">
             <span class="avatar">SD</span>
             <div class="meta">
@@ -502,55 +533,88 @@
         </ul>
       </article>
 
-      <!-- Client Meetings -->
-      <article class="wed-card">
-        <header class="wed-head">
-          <div class="wed-head-left">
-            <span class="wed-icon" aria-hidden="true">📍</span>
-            <h2>Client Meetings (Different Locations)</h2>
+      <!-- B) Travelling Together (no cards; one journey line) -->
+      <article class="wed-journey">
+        <header class="wed-journey-head">
+          <div class="left">
+            <span class="ico" aria-hidden="true">🚐</span>
+            <h2>On the Road (Together)</h2>
           </div>
-          <span class="status-chip">Times tentative</span>
+          <span class="chip status">Times tentative</span>
         </header>
 
-        <ul class="meeting-list">
-          <li class="meeting">
-            <div class="who">
-              <span class="avatar">T</span>
-              <span class="name">Tim</span>
+        <p class="crew">Tim • Werner • Ashley — travelling together between client locations</p>
+
+        <div class="journey" role="list">
+          <!-- Each stop = one node on the line. Times are placeholders—edit anytime -->
+          <div class="stop" role="listitem">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="label">
+              <div class="what">Depart Office</div>
+              <div class="meta">
+                <span class="chip time">9:15</span>
+              </div>
             </div>
-            <!-- Edit these times later when confirmed -->
-            <div class="details">
-              <span class="time-chip">10:15 – 11:00</span>
-              <span class="loc-chip">@ Client A (TBD)</span>
+          </div>
+
+          <div class="stop" role="listitem">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="label">
+              <div class="what">Client A — Meeting</div>
+              <div class="meta">
+                <span class="chip time">10:30–11:15 (TBD)</span>
+                <span class="chip loc">@ Client A</span>
+              </div>
             </div>
-          </li>
-          <li class="meeting">
-            <div class="who">
-              <span class="avatar">W</span>
-              <span class="name">Werner</span>
+          </div>
+
+          <div class="stop" role="listitem">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="label">
+              <div class="what">Transit / Coffee</div>
+              <div class="meta">
+                <span class="chip time">11:35–12:10 (TBD)</span>
+              </div>
             </div>
-            <div class="details">
-              <span class="time-chip">1:30 – 2:10</span>
-              <span class="loc-chip">@ Client B (TBD)</span>
+          </div>
+
+          <div class="stop" role="listitem">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="label">
+              <div class="what">Client B — Meeting</div>
+              <div class="meta">
+                <span class="chip time">1:40–2:25 (TBD)</span>
+                <span class="chip loc">@ Client B</span>
+              </div>
             </div>
-          </li>
-          <li class="meeting">
-            <div class="who">
-              <span class="avatar">A</span>
-              <span class="name">Ashley</span>
+          </div>
+
+          <div class="stop" role="listitem">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="label">
+              <div class="what">Client C — Wrap-up</div>
+              <div class="meta">
+                <span class="chip time">3:15–3:45 (TBD)</span>
+                <span class="chip loc">@ Client C</span>
+              </div>
             </div>
-            <div class="details">
-              <span class="time-chip">3:20 – 4:00</span>
-              <span class="loc-chip">@ Client C (TBD)</span>
+          </div>
+
+          <div class="stop" role="listitem">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="label">
+              <div class="what">Return to Hotel/Office</div>
+              <div class="meta">
+                <span class="chip time">~4:10 (TBD)</span>
+              </div>
             </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </article>
     </div>
   </div>
 </section>
 <!-- End WEDNESDAY -->
-
 
   <!-- THURSDAY -->
   <section id="thursday" class="py-12 bg-gray-50">
@@ -648,6 +712,7 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
 
 
 
