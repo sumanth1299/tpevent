@@ -84,57 +84,85 @@
   <!-- End Service Section -->
 
   <!-- Projects Section -->
-  <section id="projects">
-    <div class="projects container">
-      <div class="projects-header">
-        <h1 class="section-title">Thursday <span>Activity</span></h1>
-      </div>
-      <div class="all-projects">
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Nose Hill Hike</h1>
-            <h2>10:00 AM - 11:30 AM</h2>
-            <p id="menu"> <strong style="color: red;">! Reach Nose Hill by 10:00 AM </strong><br>Address: TBD, Calgary, Alberta</p>
-          </div>
-          <div class="project-img">
-            <img src="https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjMxODgxODcvZGQ4N2U2NDRiY2I1YWNiNzBjNDcwZWU3NmE3OGFiMjIuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==" alt="img">
-          </div>
+  <!-- THURSDAY -->
+<section id="thursday" class="day py-12">
+  <div class="container mx-auto px-4">
+    <h1 class="section-title text-3xl md:text-4xl font-bold text-center mb-8">
+      Thursday <span class="text-yellow-500">Activity</span>
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Nose Hill Hike -->
+      <article class="card bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-gray-900">Nose Hill Hike</h2>
+          <h3 class="text-gray-500 font-semibold mt-1">10:00 AM - 11:30 AM</h3>
+          <p id="menu" class="text-gray-700 mt-3">
+            <strong class="text-red-600">! Reach Nose Hill by 10:00 AM</strong><br>
+            Address: TBD, Calgary, Alberta
+          </p>
         </div>
-        <div class="project-item">
-          <div class="project-info">
-            <h1>Bowling</h1>
-            <h2>2:00 PM - 4:25 PM</h2>
-            <p id="menu"> Address: 2916 5th Ave NE Calgary,AB T2A 6K4 </p>
-          </div>
-          <div class="project-img">
-            <img src="./img/bowl.jpg" alt="img">
-          </div>
+        <img
+          class="w-full h-64 object-cover"
+          src="https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjMxODgxODcvZGQ4N2U2NDRiY2I1YWNiNzBjNDcwZWU3NmE3OGFiMjIuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==" 
+          alt="img"
+        />
+      </article>
+
+      <!-- Bowling -->
+      <article class="card bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-gray-900">Bowling</h2>
+          <h3 class="text-gray-500 font-semibold mt-1">2:00 PM - 4:25 PM</h3>
+          <p id="menu" class="text-gray-700 mt-3">
+            Address: 2916 5th Ave NE Calgary,AB T2A 6K4
+          </p>
         </div>
-		   <div class="project-item">
-          <div class="project-info">
-            <h1>Axe Throwing</h1>
-            <h2>5:00 PM - 6:00 PM</h2>
-            <p id="menu"> Address: 2015 32 Ave NE #23, Calgary, AB T2E 6Z3 </p>
-          </div>
-          <div class="project-img">
-            <img src="https://as1.ftcdn.net/v2/jpg/03/00/75/10/1000_F_300751098_IDyIRUjaQVsfNwHHfCGB8zMpOtC6qriy.jpg" alt="img">
-          </div>
+        <img
+          class="w-full h-64 object-cover"
+          src="./img/bowl.jpg"
+          alt="img"
+        />
+      </article>
+
+      <!-- Axe Throwing -->
+      <article class="card bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-gray-900">Axe Throwing</h2>
+          <h3 class="text-gray-500 font-semibold mt-1">5:00 PM - 6:00 PM</h3>
+          <p id="menu" class="text-gray-700 mt-3">
+            Address: 2015 32 Ave NE #23, Calgary, AB T2E 6Z3
+          </p>
         </div>
-	<div class="project-item">
-          <div class="project-info">
-            <h1>Dinner at  Hitchki</h1>
-            <h2>6:30 PM - 8:30 PM</h2>
-            <p> <p id="menu">Address: 1155 Cornerstone Blvd NE, Calgary, AB T3N 1A9</p></p>
-          </div>
-          <div class="project-img">
-            <img src="./img/dinner.jpg" alt="img">
-          </div>
+        <img
+          class="w-full h-64 object-cover"
+          src="https://as1.ftcdn.net/v2/jpg/03/00/75/10/1000_F_300751098_IDyIRUjaQVsfNwHHfCGB8zMpOtC6qriy.jpg"
+          alt="img"
+        />
+      </article>
+
+      <!-- Dinner at Hitchki -->
+      <article class="card bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold text-gray-900">Dinner at  Hitchki</h2>
+          <h3 class="text-gray-500 font-semibold mt-1">6:30 PM - 8:30 PM</h3>
+          <p id="menu" class="text-gray-700 mt-3">
+            Address: 1155 Cornerstone Blvd NE, Calgary, AB T3N 1A9
+          </p>
         </div>
-        
-        </div>
-      </div>
+        <img
+          class="w-full h-64 object-cover"
+          src="./img/dinner.jpg"
+          alt="img"
+        />
+      </article>
+
     </div>
-  </section>
+  </div>
+</section>
+<!-- End Thursday -->
+
   <!-- End Projects Section -->
 
   
@@ -185,6 +213,7 @@
 </body>
 
 </html>
+
 
 
 
