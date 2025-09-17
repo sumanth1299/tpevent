@@ -159,10 +159,33 @@
     </div>
   </section>
   <!-- End Footer -->
+	 <!-- Day Switcher -->
+  <script>
+    (function () {
+      const valid = ['#monday', '#tuesday', '#wednesday', '#thursday'];
+      const links = document.querySelectorAll('#header .nav-list a[href^="#"]');
+      const sections = valid.map(id => document.querySelector(id)).filter(Boolean);
+
+      function show(id){
+        sections.forEach(s => s.classList.toggle('active', '#'+s.id === id));
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+        if(id !== '#hero'){ document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'}); }
+        try{ history.replaceState(null,'',id); }catch(e){}
+      }
+      links.forEach(a=>{
+        const href = a.getAttribute('href');
+        if (valid.includes(href)){
+          a.addEventListener('click', (e)=>{ e.preventDefault(); show(href); });
+        }
+      });
+      show(valid.includes(location.hash) ? location.hash : '#monday');
+    })();
+  </script>
   <script src="./app.js"></script>
 </body>
 
 </html>
+
 
 
 
