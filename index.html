@@ -11,9 +11,9 @@
     html, body { max-width: 100%; overflow-x: hidden; }
     *, *::before, *::after { box-sizing: border-box; }
 
-    /* Only one day visible at a time */
-    #monday, #tuesday, #wednesday, #thursday { display: none; }
-    #monday.active, #tuesday.active, #wednesday.active, #thursday.active { display: block; }
+    /* Only one day visible at a time (include FRIDAY) */
+    #monday, #tuesday, #wednesday, #thursday, #friday { display: none; }
+    #monday.active, #tuesday.active, #wednesday.active, #thursday.active, #friday.active { display: block; }
 
     /* ===== Tuesday: Agenda Cards Rail ===== */
     #tuesday.tue-agenda{padding:60px 16px;background:#f6f7fb}
@@ -56,12 +56,13 @@
     #tuesday .tue-card:focus-within{outline:3px solid #f59e0b;outline-offset:4px}
     @media(prefers-reduced-motion:reduce){ #tuesday .tue-card{transition:none} }
 
+    /* ===== Thursday vertical stack + heading polish ===== */
     #thursday .all-projects{
       display:flex !important;
       flex-direction:column !important;
       gap:18px;
       position:relative;
-      padding:0 12px;            /* breathing room on phones */
+      padding:0 12px;
     }
     #thursday .project-item{
       max-width: 880px;
@@ -74,421 +75,238 @@
       background:#fff;
       border-radius:12px;
       box-shadow:0 6px 16px rgba(0,0,0,.08);
+      transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+      will-change: transform, box-shadow;
     }
-
-    /* allow text to wrap on tiny screens (prevents sideways scroll) */
     #thursday .project-info{ min-width:0; flex:1 1 auto; }
     #thursday .project-info h1,
     #thursday .project-info h2,
     #thursday .project-info p{ overflow-wrap:anywhere; word-break:break-word; margin:0 0 6px; }
-
-    /* thumbnails stay small and never stretch */
     #thursday .project-img{ flex:0 0 auto; }
     #thursday .project-img img{
-      width:80px !important;
-      height:80px !important;
-      max-width:none !important;
-      object-fit:cover;
-      border-radius:8px;
-      display:block;
+      width:80px !important; height:80px !important;
+      max-width:none !important; object-fit:cover; border-radius:8px; display:block;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
     }
-
-    /* 2) "Thursday Activity" — posh, merged feel (same colors) */
     #thursday .section-title{
-      text-align:center;
-      font-weight:900;
-      letter-spacing:-.015em;
-      line-height:1.1;
-      margin-bottom:28px;
-      position:relative;
-      display:inline-block;
-      padding:6px 16px;
+      text-align:center; font-weight:900; letter-spacing:-.015em; line-height:1.1;
+      margin-bottom:28px; position:relative; display:inline-block; padding:6px 16px;
     }
     #thursday .section-title::before,
     #thursday .section-title::after{
-      content:"";
-      display:inline-block;
-      vertical-align:middle;
-      width:clamp(28px,7vw,80px);
-      height:2px;
-      background:rgba(0,0,0,.12);
-      border-radius:2px;
-      margin:0 12px;
+      content:""; display:inline-block; vertical-align:middle;
+      width:clamp(28px,7vw,80px); height:2px; background:rgba(0,0,0,.12);
+      border-radius:2px; margin:0 12px;
     }
     #thursday .section-title span{ position:relative; }
     #thursday .section-title span::after{
-      content:"";
-      position:absolute; left:-4px; right:-4px; bottom:3px;
+      content:""; position:absolute; left:-4px; right:-4px; bottom:3px;
       height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
     }
 
-    /* Mobile tweaks */
-    @media (max-width: 600px){
-      #thursday .project-item{ max-width:100%; padding:16px; gap:12px; }
+    /* Thursday mobile stack */
+    @media (max-width: 768px) {
+      #thursday > .container{ display:block !important; gap:0 !important; }
+      #thursday .section-title{ display:block; width:100%; margin:0 0 14px; text-align:center; order:-1; }
+      #thursday .all-projects{ display:flex !important; flex-direction:column !important; gap:12px; order:0; }
+      #thursday .project-item{ width:100%; max-width:100%; padding:16px; gap:12px; }
       #thursday .project-img img{ width:56px !important; height:56px !important; }
-      #thursday .section-title{ padding:6px 10px; }
-      #thursday .section-title::before,
-      #thursday .section-title::after{ width:clamp(18px,10vw,48px); }
     }
 
-@media (max-width: 768px) {
-  /* Make the Thursday wrapper a single column */
-  #thursday > .container{
-    display: block !important;          /* override flex from the template */
-    align-items: initial !important;
-    justify-content: initial !important;
-    gap: 0 !important;
-  }
-
-  /* Ensure heading appears first, full width */
-  #thursday .section-title{
-    display: block;
-    width: 100%;
-    margin: 0 0 14px;
-    text-align: center;
-    order: -1;                          /* if the parent stays flex, this still forces it first */
-  }
-
-  /* List of cards directly under the heading */
-  #thursday .all-projects{
-    display: flex !important;
-    flex-direction: column !important;  /* vertical list */
-    gap: 12px;
-    order: 0;
-  }
-
-  /* Cards are full width; tidy spacing */
-  #thursday .project-item{
-    width: 100%;
-    max-width: 100%;
-    padding: 16px;
-    gap: 12px;
-  }
-
-  /* Smaller thumbnails on phones */
-  #thursday .project-img img{
-    width: 56px !important;
-    height: 56px !important;
-  }
-
-  /* Let long lines wrap instead of forcing horizontal scroll */
-  #thursday .project-info{ min-width: 0; }
-  #thursday .project-info h1,
-  #thursday .project-info h2,
-  #thursday .project-info p{
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    margin: 0 0 6px;
-  }
-}
-
-/* base transitions */
-#thursday .project-item{
-  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
-  will-change: transform, box-shadow;
-}
-#thursday .project-img img{
-  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-}
-
-/* desktop/trackpad hover */
-@media (hover:hover) and (pointer:fine){
-  #thursday .project-item:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,.14);
-    background-color: #f9fafb;  /* subtle tint */
-  }
-  #thursday .project-item:hover .project-img img{
-    transform: scale(1.06);
-    box-shadow: 0 6px 16px rgba(0,0,0,.18);
-  }
-  /* make the main title feel interactive without changing colors */
-  #thursday .project-item:hover .project-info h1{
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
-  }
-  /* nudge the red alert a bit */
-  #thursday .project-item:hover #menu strong{
-    filter: saturate(1.12) brightness(1.04);
-  }
-}
-
-/* keyboard accessibility */
-#thursday .project-item:focus-within{
-  outline: 3px solid #fcb900;
-  outline-offset: 3px;
-  transform: translateY(-2px);
-}
-
-/* touch feedback (phones/tablets) */
-@media (hover:none){
-  #thursday .project-item:active{
-    transform: scale(0.99);
-  }
-}
-
-/* respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  #thursday .project-item,
-  #thursday .project-img img{
-    transition: none;
-  }
-}
-/* Thursday card title underline color on hover */
-@media (hover:hover) and (pointer:fine){
-  #thursday .project-item:hover .project-info h1{
-    text-decoration: underline;
-    text-decoration-color: #fcb900;   /* your color */
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-}
-
-/* Match the keyboard focus style too (optional) */
-#thursday .project-item:focus-within .project-info h1{
-  text-decoration: underline;
-  text-decoration-color: #fcb900;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-
+    /* Thursday hover + underline color */
+    @media (hover:hover) and (pointer:fine){
+      #thursday .project-item:hover{
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0,0,0,.14);
+        background-color: #f9fafb;
+      }
+      #thursday .project-item:hover .project-img img{
+        transform: scale(1.06);
+        box-shadow: 0 6px 16px rgba(0,0,0,.18);
+      }
+      #thursday .project-item:hover .project-info h1{
+        text-decoration: underline;
+        text-decoration-color: #fcb900;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+      }
+    }
+    #thursday .project-item:focus-within{
+      outline: 3px solid #fcb900; outline-offset: 3px; transform: translateY(-2px);
+    }
+    @media (hover:none){ #thursday .project-item:active{ transform: scale(0.99); } }
+    @media (prefers-reduced-motion: reduce){
+      #thursday .project-item, #thursday .project-img img{ transition:none; }
+    }
     #thursday .section-title:hover{
-  text-decoration: underline;
-  text-decoration-color: #fcb900;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
-}
+      text-decoration: underline; text-decoration-color: #fcb900;
+      text-decoration-thickness: 2px; text-underline-offset: 6px;
+    }
 
-/* ===== WEDNESDAY — Posh Dual Layout (Office + Journey) ===== */
-#wednesday.wed-posh { padding: 60px 16px; background: #f7f8fb; }
-#wednesday .wed-wrap { max-width: 1100px; margin: 0 auto; }
+    /* ===== WEDNESDAY — Posh Dual Layout (Office + Journey) ===== */
+    #wednesday.wed-posh { padding: 60px 16px; background: #f7f8fb; }
+    #wednesday .wed-wrap { max-width: 1100px; margin: 0 auto; }
+    #wednesday .wed-title{
+      text-align:center; margin:0 0 26px; font-weight:900;
+      font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
+    }
+    #wednesday .wed-title span{ color:#fcb900; position:relative; }
+    #wednesday .wed-title span::after{
+      content:""; position:absolute; inset:auto -6px 4px -6px;
+      height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+    }
+    #wednesday .wed-grid{ display:grid; grid-template-columns:1fr; gap:22px; }
+    @media (min-width: 960px){ #wednesday .wed-grid{ grid-template-columns:1fr 1fr; } }
+    #wednesday .wed-slab{
+      background:#fff; border-radius:16px; padding:18px;
+      box-shadow:0 10px 26px rgba(2,6,23,.07);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    #wednesday .wed-slab:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
+    #wednesday .wed-slab-head{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
+    }
+    #wednesday .wed-slab-head .left{ display:flex; align-items:center; gap:10px; }
+    #wednesday .wed-slab h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+    #wednesday .ico{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background:#fff7e0; color:#8a4b00; border:1px solid #ffd585;
+    }
+    #wednesday .chip{
+      display:inline-block; border-radius:999px; white-space:nowrap; font-weight:700;
+      padding:6px 10px;
+    }
+    #wednesday .chip.time{ color:#8b5a00; background:#fff7e6; border:1px solid #ffd89a; }
+    #wednesday .chip.status{ color:#5b5b5b; background:#f1f1f1; border:1px solid #e6e6e6; }
+    #wednesday .chip.loc{ color:#1f2937; background:#fff; border:1px dashed #cfcfcf; }
+    #wednesday .roster{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
+    #wednesday .person{
+      display:flex; align-items:center; gap:10px; padding:10px 12px;
+      border:1px solid #ececec; border-radius:12px; background:#ffffff;
+    }
+    #wednesday .avatar{
+      width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+      font-weight:800; color:#8a4b00; background:#fff3c4; border:1px solid #ffd585; flex:0 0 auto;
+    }
+    #wednesday .meta .name{ font-weight:700; color:#111827; }
+    #wednesday .meta .note{ font-size:.9rem; color:#6b7280; }
 
-/* Title with classy amber underpaint */
-#wednesday .wed-title{
-  text-align:center; margin:0 0 26px; font-weight:900;
-  font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
-}
-#wednesday .wed-title span{ color:#fcb900; position:relative; }
-#wednesday .wed-title span::after{
-  content:""; position:absolute; inset:auto -6px 4px -6px;
-  height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
-}
+    /* Journey (one continuous line) */
+    #wednesday .wed-journey{
+      background:#fff; border-radius:16px; padding:18px;
+      box-shadow:0 10px 26px rgba(2,6,23,.07);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    #wednesday .wed-journey:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
+    #wednesday .wed-journey-head{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px;
+    }
+    #wednesday .wed-journey-head .left{ display:flex; align-items:center; gap:10px; }
+    #wednesday .wed-journey h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+    #wednesday .crew{ margin:4px 0 12px; color:#374151; }
 
-/* Two responsive columns */
-#wednesday .wed-grid{ display:grid; grid-template-columns:1fr; gap:22px; }
-@media (min-width: 960px){ #wednesday .wed-grid{ grid-template-columns:1fr 1fr; } }
-
-/* Card-style slab for In Office */
-#wednesday .wed-slab{
-  background:#fff; border-radius:16px; padding:18px;
-  box-shadow:0 10px 26px rgba(2,6,23,.07);
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-}
-#wednesday .wed-slab:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
-
-#wednesday .wed-slab-head{
-  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
-}
-#wednesday .wed-slab-head .left{ display:flex; align-items:center; gap:10px; }
-#wednesday .wed-slab h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
-#wednesday .ico{
-  width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
-  background:#fff7e0; color:#8a4b00; border:1px solid #ffd585;
-}
-
-/* Chips */
-#wednesday .chip{
-  display:inline-block; border-radius:999px; white-space:nowrap; font-weight:700;
-  padding:6px 10px;
-}
-#wednesday .chip.time{ color:#8b5a00; background:#fff7e6; border:1px solid #ffd89a; }
-#wednesday .chip.status{ color:#5b5b5b; background:#f1f1f1; border:1px solid #e6e6e6; }
-#wednesday .chip.loc{ color:#1f2937; background:#fff; border:1px dashed #cfcfcf; }
-
-/* Roster list */
-#wednesday .roster{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
-#wednesday .person{
-  display:flex; align-items:center; gap:10px; padding:10px 12px;
-  border:1px solid #ececec; border-radius:12px; background:#ffffff;
-}
-#wednesday .avatar{
-  width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
-  font-weight:800; color:#8a4b00; background:#fff3c4; border:1px solid #ffd585; flex:0 0 auto;
-}
-#wednesday .meta .name{ font-weight:700; color:#111827; }
-#wednesday .meta .note{ font-size:.9rem; color:#6b7280; }
-
-/* Journey (one continuous line, horizontally scrollable on small screens) */
-#wednesday .wed-journey{
-  background:#fff; border-radius:16px; padding:18px;
-  box-shadow:0 10px 26px rgba(2,6,23,.07);
-  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-}
-#wednesday .wed-journey:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
-
-#wednesday .wed-journey-head{
-  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px;
-}
-#wednesday .wed-journey-head .left{ display:flex; align-items:center; gap:10px; }
-#wednesday .wed-journey h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
-#wednesday .crew{ margin:4px 0 12px; color:#374151; }
-
-/* The journey ribbon */
-#wednesday .journey{
-  position:relative;
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:minmax(160px, 1fr);
-  gap:18px;
-  padding:18px 10px 6px;
-  overflow-x:auto; overflow-y:hidden;
-  scrollbar-width:thin;
-}
-#wednesday .journey::before{
-  /* the connecting line */
-  content:"";
-  position:absolute; left:10px; right:10px; top:42px;
-  height:3px; background:linear-gradient(90deg, #fcb900, #ffe083);
-  border-radius:3px; opacity:.9;
-}
-
-#wednesday .stop{
-  position:relative; z-index:1; min-width:0;
-  display:grid; gap:8px; align-content:start;
-}
-#wednesday .stop .dot{
-  width:16px; height:16px; border-radius:50%;
-  background:#fff; border:4px solid #fcb900; margin-left:2px;
-  box-shadow:0 0 0 3px rgba(252,185,0,.2);
-}
-#wednesday .stop .label .what{ font-weight:800; color:#111827; margin-bottom:2px; }
-#wednesday .stop .meta{ display:flex; flex-wrap:wrap; gap:6px; }
-
-@media (max-width:640px){
-  #wednesday .journey{ grid-auto-columns:minmax(140px, 1fr); gap:14px; }
-  #wednesday .journey::before{ top:38px; }
-}
-
-/* Hover polish */
-@media (hover:hover) and (pointer:fine){
-  #wednesday .stop:hover .what{
-    text-decoration:underline;
-    text-decoration-color:#fcb900;
-    text-underline-offset:3px;
-    text-decoration-thickness:2px;
-  }
-}
-
-/* Accessibility + reduced motion */
-#wednesday .wed-slab:focus-within,
-#wednesday .wed-journey:focus-within{ outline:3px solid #fcb900; outline-offset:4px; }
-@media (prefers-reduced-motion:reduce){
-  #wednesday .wed-slab, #wednesday .wed-journey{ transition:none; }
-}
+    #wednesday .journey{
+      position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(160px, 1fr);
+      gap:18px; padding:18px 10px 6px; overflow-x:auto; overflow-y:hidden; scrollbar-width:thin;
+    }
+    #wednesday .journey::before{
+      content:""; position:absolute; left:10px; right:10px; top:42px;
+      height:3px; background:linear-gradient(90deg, #fcb900, #ffe083);
+      border-radius:3px; opacity:.9;
+    }
+    #wednesday .stop{ position:relative; z-index:1; min-width:0; display:grid; gap:8px; align-content:start; }
+    #wednesday .stop .dot{
+      width:16px; height:16px; border-radius:50%; background:#fff; border:4px solid #fcb900; margin-left:2px;
+      box-shadow:0 0 0 3px rgba(252,185,0,.2);
+    }
+    #wednesday .stop .label .what{ font-weight:800; color:#111827; margin-bottom:2px; }
+    #wednesday .stop .meta{ display:flex; flex-wrap:wrap; gap:6px; }
+    @media (max-width:640px){
+      #wednesday .journey{ grid-auto-columns:minmax(140px, 1fr); gap:14px; }
+      #wednesday .journey::before{ top:38px; }
+    }
+    @media (hover:hover) and (pointer:fine){
+      #wednesday .stop:hover .what{
+        text-decoration:underline; text-decoration-color:#fcb900;
+        text-underline-offset:3px; text-decoration-thickness:2px;
+      }
+    }
+    #wednesday .wed-slab:focus-within, #wednesday .wed-journey:focus-within{ outline:3px solid #fcb900; outline-offset:4px; }
+    @media (prefers-reduced-motion:reduce){ #wednesday .wed-slab, #wednesday .wed-journey{ transition:none; } }
 
     /* ===== FRIDAY — Posh Ticket UI ===== */
-#friday.fri-posh { padding: 60px 16px; background:#f7f8fb; }
-#friday .fri-wrap { max-width: 1100px; margin: 0 auto; }
-
-/* Title with amber underpaint (same brand color) */
-#friday .fri-title{
-  text-align:center; margin:0 0 26px; font-weight:900;
-  font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
-}
-#friday .fri-title span{ color:#fcb900; position:relative; }
-#friday .fri-title span::after{
-  content:""; position:absolute; inset:auto -6px 4px -6px;
-  height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
-}
-
-/* Ticket container with perforated edges */
-#friday .fri-ticket{
-  position:relative; overflow:hidden; border-radius:20px;
-  background:#fff; box-shadow:0 12px 30px rgba(2,6,23,.08);
-}
-/* perforations */
-#friday .fri-ticket::before,
-#friday .fri-ticket::after{
-  content:"";
-  position:absolute; top:90px; bottom:90px; width:16px;
-  background:
-    radial-gradient(circle at right, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
-  pointer-events:none;
-}
-#friday .fri-ticket::before{ left:-8px; }
-#friday .fri-ticket::after{
-  right:-8px;
-  background:
-    radial-gradient(circle at left, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
-}
-
-/* Gradient banner */
-#friday .fri-banner{
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:22px 22px;
-  background: linear-gradient(135deg, #fcb900 0%, #ffe08a 100%);
-  border-bottom:1px solid rgba(17,24,39,.08);
-}
-#friday .banner-left{ display:flex; align-items:center; gap:12px; min-width:0; }
-#friday .day-badge{
-  display:inline-block; padding:6px 12px; border-radius:999px;
-  font-weight:900; letter-spacing:.06em;
-  background:#111827; color:#fff;
-}
-#friday .banner-title{
-  margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827;
-}
-#friday .chip{
-  display:inline-block; padding:6px 10px; border-radius:999px; white-space:nowrap; font-weight:700;
-}
-#friday .chip.subtle{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
-
-/* List */
-#friday .fri-list{
-  margin:0; padding:16px 22px 22px; list-style:none; display:grid; gap:12px;
-}
-#friday .fri-item{
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  background:#ffffff; border-radius:14px; padding:14px 16px;
-  border:1px solid #eee; box-shadow:0 6px 18px rgba(2,6,23,.04);
-  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
-}
-#friday .fri-item .title{
-  display:flex; align-items:center; gap:10px;
-  font-weight:800; color:#111827;
-}
-#friday .fri-item .ico{
-  width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
-  background:#fff3c4; color:#8a4b00; border:1px solid #ffd585;
-}
-/* chips on the right */
-#friday .chip.solid{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
-#friday .chip.dashed{ background:#fff; border:1px dashed #cfcfcf; color:#374151; }
-
-/* Hover polish (desktop) */
-@media (hover:hover) and (pointer:fine){
-  #friday .fri-item:hover{
-    transform: translateY(-3px);
-    box-shadow:0 14px 32px rgba(2,6,23,.12);
-    background:#fafafa;
-  }
-  #friday .fri-item:hover .title{
-    text-decoration: underline;
-    text-decoration-color: #fcb900;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 2px;
-  }
-}
-
-/* Mobile tweaks */
-@media (max-width:560px){
-  #friday .fri-banner{ padding:18px 16px; }
-  #friday .fri-list{ padding:14px 16px 18px; }
-  #friday .fri-item{ padding:12px 12px; }
-  #friday .fri-ticket::before, #friday .fri-ticket::after{ top:70px; bottom:70px; }
-}
-
+    #friday.fri-posh { padding: 60px 16px; background:#f7f8fb; }
+    #friday .fri-wrap { max-width: 1100px; margin: 0 auto; }
+    #friday .fri-title{
+      text-align:center; margin:0 0 26px; font-weight:900;
+      font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
+    }
+    #friday .fri-title span{ color:#fcb900; position:relative; }
+    #friday .fri-title span::after{
+      content:""; position:absolute; inset:auto -6px 4px -6px;
+      height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+    }
+    #friday .fri-ticket{
+      position:relative; overflow:hidden; border-radius:20px;
+      background:#fff; box-shadow:0 12px 30px rgba(2,6,23,.08);
+    }
+    #friday .fri-ticket::before,
+    #friday .fri-ticket::after{
+      content:""; position:absolute; top:90px; bottom:90px; width:16px; pointer-events:none;
+      background: radial-gradient(circle at right, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
+    }
+    #friday .fri-ticket::before{ left:-8px; }
+    #friday .fri-ticket::after{
+      right:-8px;
+      background: radial-gradient(circle at left, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
+    }
+    #friday .fri-banner{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:22px 22px;
+      background: linear-gradient(135deg, #fcb900 0%, #ffe08a 100%);
+      border-bottom:1px solid rgba(17,24,39,.08);
+    }
+    #friday .banner-left{ display:flex; align-items:center; gap:12px; min-width:0; }
+    #friday .day-badge{
+      display:inline-block; padding:6px 12px; border-radius:999px;
+      font-weight:900; letter-spacing:.06em; background:#111827; color:#fff;
+    }
+    #friday .banner-title{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+    #friday .chip{ display:inline-block; padding:6px 10px; border-radius:999px; white-space:nowrap; font-weight:700; }
+    #friday .chip.subtle{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
+    #friday .fri-list{ margin:0; padding:16px 22px 22px; list-style:none; display:grid; gap:12px; }
+    #friday .fri-item{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      background:#ffffff; border-radius:14px; padding:14px 16px;
+      border:1px solid #eee; box-shadow:0 6px 18px rgba(2,6,23,.04);
+      transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+    }
+    #friday .fri-item .title{ display:flex; align-items:center; gap:10px; font-weight:800; color:#111827; }
+    #friday .fri-item .ico{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background:#fff3c4; color:#8a4b00; border:1px solid #ffd585;
+    }
+    #friday .chip.solid{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
+    #friday .chip.dashed{ background:#fff; border:1px dashed #cfcfcf; color:#374151; }
+    @media (hover:hover) and (pointer:fine){
+      #friday .fri-item:hover{
+        transform: translateY(-3px);
+        box-shadow:0 14px 32px rgba(2,6,23,.12);
+        background:#fafafa;
+      }
+      #friday .fri-item:hover .title{
+        text-decoration: underline;
+        text-decoration-color: #fcb900;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 2px;
+      }
+    }
+    @media (max-width:560px){
+      #friday .fri-banner{ padding:18px 16px; }
+      #friday .fri-list{ padding:14px 16px 18px; }
+      #friday .fri-item{ padding:12px 12px; }
+      #friday .fri-ticket::before, #friday .fri-ticket::after{ top:70px; bottom:70px; }
+    }
   </style>
 </head>
 
@@ -510,7 +328,7 @@
             <li><a href="#tuesday">TUESDAY</a></li>
             <li><a href="#wednesday">WEDNESDAY</a></li>
             <li><a href="#thursday">THURSDAY</a></li>
-            
+            <li><a href="#friday">FRIDAY</a></li><!-- added -->
           </ul>
         </div>
       </div>
@@ -524,12 +342,12 @@
         <h1>Welcome, <span></span></h1>
         <h1>Turnpikes North America <span></span></h1>
         <h1>Team Meet-up <span></span></h1>
-        <a href="#services" type="button" class="cta">Agenda</a>
+        <a href="#monday" type="button" class="cta">Agenda</a><!-- fixed target -->
       </div>
     </div>
   </section>
 
-  <!-- Monday (kept as-is) -->
+  <!-- Monday -->
   <section id="monday">
     <h1 class="section-title" style="padding-top: 15px;">Monday's <span>Plan</span></h1>
     <div class="services container">
@@ -588,114 +406,78 @@
     </div>
   </section>
 
-<!-- WEDNESDAY -->
-<section id="wednesday" class="wed-posh">
-  <div class="wed-wrap">
-    <h1 class="wed-title">Wednesday’s <span>Schedule</span></h1>
+  <!-- WEDNESDAY -->
+  <section id="wednesday" class="wed-posh">
+    <div class="wed-wrap">
+      <h1 class="wed-title">Wednesday’s <span>Schedule</span></h1>
 
-    <div class="wed-grid">
-      <!-- A) In Office -->
-      <article class="wed-slab">
-        <header class="wed-slab-head">
-          <div class="left">
-            <span class="ico" aria-hidden="true">🏢</span>
-            <h2>In Office</h2>
-          </div>
-          <span class="chip time">9:00 AM – 4:00 PM</span>
-        </header>
-
-        <ul class="roster">
-          <li class="person">
-            <span class="avatar">SD</span>
-            <div class="meta">
-              <div class="name">Sumanth</div>
-              <div class="note">Working from office</div>
+      <div class="wed-grid">
+        <!-- A) In Office -->
+        <article class="wed-slab">
+          <header class="wed-slab-head">
+            <div class="left">
+              <span class="ico" aria-hidden="true">🏢</span>
+              <h2>In Office</h2>
             </div>
-          </li>
-          <li class="person">
-            <span class="avatar">C</span>
-            <div class="meta">
-              <div class="name">Charan</div>
-              <div class="note">Working from office</div>
-            </div>
-          </li>
-          <li class="person">
-            <span class="avatar">N</span>
-            <div class="meta">
-              <div class="name">Naveen</div>
-              <div class="note">Working from home</div>
-            </div>
-          </li>
-          <li class="person">
-            <span class="avatar">A</span>
-            <div class="meta">
-              <div class="name">Arlette</div>
-              <div class="note">Working from office</div>
-            </div>
-          </li>
-        </ul>
-      </article>
+            <span class="chip time">9:00 AM – 4:00 PM</span>
+          </header>
 
-      <!-- B) Travelling Together (no cards; one journey line) -->
-      <article class="wed-journey">
-        <header class="wed-journey-head">
-          <div class="left">
-            <span class="ico" aria-hidden="true">🚐</span>
-            <h2>Meeting Clients</h2>
-          </div>
-          
-        </header>
+          <ul class="roster">
+            <li class="person"><span class="avatar">SD</span><div class="meta"><div class="name">Sumanth</div><div class="note">Working from office</div></div></li>
+            <li class="person"><span class="avatar">C</span><div class="meta"><div class="name">Charan</div><div class="note">Working from office</div></div></li>
+            <li class="person"><span class="avatar">N</span><div class="meta"><div class="name">Naveen</div><div class="note">Working from home</div></div></li>
+            <li class="person"><span class="avatar">A</span><div class="meta"><div class="name">Arlette</div><div class="note">Working from office</div></div></li>
+          </ul>
+        </article>
 
-        <p class="crew">Tim • Werner travelling between client locations</p>
+        <!-- B) Travelling Together -->
+        <article class="wed-journey">
+          <header class="wed-journey-head">
+            <div class="left">
+              <span class="ico" aria-hidden="true">🚐</span>
+              <h2>Meeting Clients</h2>
+            </div>
+          </header>
 
-        <div class="journey" role="list">
-          <!-- Each stop = one node on the line. Times are placeholders—edit anytime -->
-          <div class="stop" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            <div class="label"><br>
-              <div class="what">Vermilion, Ian Snow</div>
-              <div class="meta">
-                <span class="chip time">08:30 AM - 09:30 AM</span>
+          <p class="crew">Tim • Werner travelling between client locations</p>
+
+          <div class="journey" role="list">
+            <div class="stop" role="listitem">
+              <span class="dot" aria-hidden="true"></span>
+              <div class="label">
+                <div class="what">Vermilion, Ian Snow</div>
+                <div class="meta"><span class="chip time">08:30 AM - 09:30 AM</span></div>
+              </div>
+            </div>
+
+            <div class="stop" role="listitem">
+              <span class="dot" aria-hidden="true"></span>
+              <div class="label">
+                <div class="what">OpenText, Gerard McCann — Call</div>
+                <div class="meta"><span class="chip time">11:00 AM - 12:00 PM</span></div>
+              </div>
+            </div>
+
+            <div class="stop" role="listitem">
+              <span class="dot" aria-hidden="true"></span>
+              <div class="label">
+                <div class="what">OpenText, Randy McCabe - Call</div>
+                <div class="meta"><span class="chip time">01:00 PM - 01:30 PM</span></div>
+              </div>
+            </div>
+
+            <div class="stop" role="listitem">
+              <span class="dot" aria-hidden="true"></span>
+              <div class="label">
+                <div class="what">OpenText, John Lawson — Dinner</div>
+                <div class="meta"><span class="chip time">06:00 PM – 08:00 PM</span></div>
               </div>
             </div>
           </div>
-
-          <div class="stop" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            <div class="label"><br>
-              <div class="what">OpenText, Gerard McCann — Call</div>
-              <div class="meta">
-                <span class="chip time">11:00 AM - 12:00 PM</span>
-               
-              </div>
-            </div>
-          </div>
-
-          <div class="stop" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            <div class="label"><br>
-              <div class="what">OpenText, Randy McCabe - Call</div>
-              <div class="meta">
-                <span class="chip time">01:00 PM - 01:30 PM</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="stop" role="listitem">
-            <span class="dot" aria-hidden="true"></span>
-            <div class="label"><br>
-              <div class="what">OpenText, John Lawson — Dinner</div>
-              <div class="meta">
-                <span class="chip time">06:00 PM – 08:00 PM</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
-<!-- End WEDNESDAY -->
+  </section>
 
   <!-- THURSDAY -->
   <section id="thursday" class="py-12 bg-gray-50">
@@ -709,9 +491,7 @@
           <div class="project-info">
             <h1 class="text-xl font-bold text-gray-800">Work From Office</h1>
             <h2 class="text-gray-500 font-semibold">09:00 AM - 12:00 AM</h2>
-            <p id="menu" class="text-gray-600">
-              <br>
-            </p>
+            <p id="menu" class="text-gray-600"><br></p>
           </div>
           <div class="project-img">
             <img src="https://images.alltrails.com/eyJidWNrZXQiOiJhc3NldHMuYWxsdHJhaWxzLmNvbSIsImtleSI6InVwbG9hZHMvcGhvdG8vaW1hZ2UvMjMxODgxODcvZGQ4N2U2NDRiY2I1YWNiNzBjNDcwZWU3NmE3OGFiMjIuanBnIiwiZWRpdHMiOnsidG9Gb3JtYXQiOiJ3ZWJwIiwicmVzaXplIjp7IndpZHRoIjoyMDQ4LCJoZWlnaHQiOjIwNDgsImZpdCI6Imluc2lkZSJ9LCJyb3RhdGUiOm51bGwsImpwZWciOnsidHJlbGxpc1F1YW50aXNhdGlvbiI6dHJ1ZSwib3ZlcnNob290RGVyaW5naW5nIjp0cnVlLCJvcHRpbWlzZVNjYW5zIjp0cnVlLCJxdWFudGlzYXRpb25UYWJsZSI6M319fQ==" alt="img" width="80" height="80" loading="lazy" />
@@ -755,41 +535,31 @@
   </section>
 
   <!-- FRIDAY -->
-<section id="friday" class="fri-posh">
-  <div class="fri-wrap">
-    <h1 class="fri-title">Friday’s <span>Plan</span></h1>
-
-    <div class="fri-ticket">
-      <header class="fri-banner">
-        <div class="banner-left">
-          <span class="day-badge" aria-hidden="true">FRIDAY</span>
-          <h2 class="banner-title">Team Schedule</h2>
-        </div>
-        <span class="chip subtle">On-site day</span>
-      </header>
-
-      <ul class="fri-list">
-        <li class="fri-item wfo">
-          <div class="title">
-            <span class="ico" aria-hidden="true">💼</span>
-            Work From Office
+  <section id="friday" class="fri-posh">
+    <div class="fri-wrap">
+      <h1 class="fri-title">Friday’s <span>Plan</span></h1>
+      <div class="fri-ticket">
+        <header class="fri-banner">
+          <div class="banner-left">
+            <span class="day-badge" aria-hidden="true">FRIDAY</span>
+            <h2 class="banner-title">Team Schedule</h2>
           </div>
-          <span class="chip solid">Office</span>
-        </li>
+          <span class="chip subtle">On-site day</span>
+        </header>
 
-        <li class="fri-item lunch">
-          <div class="title">
-            <span class="ico" aria-hidden="true">🍽️</span>
-            Lunch
-          </div>
-          <span class="chip dashed">Optional</span>
-        </li>
-      </ul>
+        <ul class="fri-list">
+          <li class="fri-item wfo">
+            <div class="title"><span class="ico" aria-hidden="true">💼</span>Work From Office</div>
+            <span class="chip solid">Office</span>
+          </li>
+          <li class="fri-item lunch">
+            <div class="title"><span class="ico" aria-hidden="true">🍽️</span>Lunch</div>
+            <span class="chip dashed">Optional</span>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
-<!-- End FRIDAY -->
-
+  </section>
 
   <!-- Footer -->
   <section id="footer">
@@ -807,7 +577,8 @@
   <!-- Day Switcher -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday'];
+      // include FRIDAY
+      const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday', '#friday'];
       const sections = DAY_IDS.map(id => document.querySelector(id)).filter(Boolean);
       const links = Array.from(document.querySelectorAll('#header .nav-list a'))
         .filter(a => DAY_IDS.includes(a.getAttribute('href')));
@@ -829,19 +600,3 @@
   <script src="./app.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
