@@ -387,6 +387,108 @@
   #wednesday .wed-slab, #wednesday .wed-journey{ transition:none; }
 }
 
+    /* ===== FRIDAY — Posh Ticket UI ===== */
+#friday.fri-posh { padding: 60px 16px; background:#f7f8fb; }
+#friday .fri-wrap { max-width: 1100px; margin: 0 auto; }
+
+/* Title with amber underpaint (same brand color) */
+#friday .fri-title{
+  text-align:center; margin:0 0 26px; font-weight:900;
+  font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
+}
+#friday .fri-title span{ color:#fcb900; position:relative; }
+#friday .fri-title span::after{
+  content:""; position:absolute; inset:auto -6px 4px -6px;
+  height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+}
+
+/* Ticket container with perforated edges */
+#friday .fri-ticket{
+  position:relative; overflow:hidden; border-radius:20px;
+  background:#fff; box-shadow:0 12px 30px rgba(2,6,23,.08);
+}
+/* perforations */
+#friday .fri-ticket::before,
+#friday .fri-ticket::after{
+  content:"";
+  position:absolute; top:90px; bottom:90px; width:16px;
+  background:
+    radial-gradient(circle at right, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
+  pointer-events:none;
+}
+#friday .fri-ticket::before{ left:-8px; }
+#friday .fri-ticket::after{
+  right:-8px;
+  background:
+    radial-gradient(circle at left, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
+}
+
+/* Gradient banner */
+#friday .fri-banner{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:22px 22px;
+  background: linear-gradient(135deg, #fcb900 0%, #ffe08a 100%);
+  border-bottom:1px solid rgba(17,24,39,.08);
+}
+#friday .banner-left{ display:flex; align-items:center; gap:12px; min-width:0; }
+#friday .day-badge{
+  display:inline-block; padding:6px 12px; border-radius:999px;
+  font-weight:900; letter-spacing:.06em;
+  background:#111827; color:#fff;
+}
+#friday .banner-title{
+  margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827;
+}
+#friday .chip{
+  display:inline-block; padding:6px 10px; border-radius:999px; white-space:nowrap; font-weight:700;
+}
+#friday .chip.subtle{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
+
+/* List */
+#friday .fri-list{
+  margin:0; padding:16px 22px 22px; list-style:none; display:grid; gap:12px;
+}
+#friday .fri-item{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:#ffffff; border-radius:14px; padding:14px 16px;
+  border:1px solid #eee; box-shadow:0 6px 18px rgba(2,6,23,.04);
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+#friday .fri-item .title{
+  display:flex; align-items:center; gap:10px;
+  font-weight:800; color:#111827;
+}
+#friday .fri-item .ico{
+  width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+  background:#fff3c4; color:#8a4b00; border:1px solid #ffd585;
+}
+/* chips on the right */
+#friday .chip.solid{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
+#friday .chip.dashed{ background:#fff; border:1px dashed #cfcfcf; color:#374151; }
+
+/* Hover polish (desktop) */
+@media (hover:hover) and (pointer:fine){
+  #friday .fri-item:hover{
+    transform: translateY(-3px);
+    box-shadow:0 14px 32px rgba(2,6,23,.12);
+    background:#fafafa;
+  }
+  #friday .fri-item:hover .title{
+    text-decoration: underline;
+    text-decoration-color: #fcb900;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* Mobile tweaks */
+@media (max-width:560px){
+  #friday .fri-banner{ padding:18px 16px; }
+  #friday .fri-list{ padding:14px 16px 18px; }
+  #friday .fri-item{ padding:12px 12px; }
+  #friday .fri-ticket::before, #friday .fri-ticket::after{ top:70px; bottom:70px; }
+}
+
   </style>
 </head>
 
@@ -651,6 +753,43 @@
     </div>
   </section>
 
+  <!-- FRIDAY -->
+<section id="friday" class="fri-posh">
+  <div class="fri-wrap">
+    <h1 class="fri-title">Friday’s <span>Plan</span></h1>
+
+    <div class="fri-ticket">
+      <header class="fri-banner">
+        <div class="banner-left">
+          <span class="day-badge" aria-hidden="true">FRIDAY</span>
+          <h2 class="banner-title">Team Schedule</h2>
+        </div>
+        <span class="chip subtle">On-site day</span>
+      </header>
+
+      <ul class="fri-list">
+        <li class="fri-item wfo">
+          <div class="title">
+            <span class="ico" aria-hidden="true">💼</span>
+            Work From Office
+          </div>
+          <span class="chip solid">Office</span>
+        </li>
+
+        <li class="fri-item lunch">
+          <div class="title">
+            <span class="ico" aria-hidden="true">🍽️</span>
+            Lunch
+          </div>
+          <span class="chip dashed">Optional</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- End FRIDAY -->
+
+
   <!-- Footer -->
   <section id="footer">
     <div class="footer container">
@@ -689,6 +828,7 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
 
 
 
