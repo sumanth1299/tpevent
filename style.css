@@ -13,7 +13,7 @@ a {
 	text-decoration: none;
 }
 .container {
-	min-height: 60vh;
+	min-height: 100vh;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -804,4 +804,5 @@ p {
     background-color: DarkBlue;
   }
 }
+
 
