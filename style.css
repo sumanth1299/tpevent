@@ -1,4 +1,10 @@
-  /* Global mobile safety */
+/* Make anchored day sections stop *below* the sticky header */
+section.day { scroll-margin-top: 84px; }          /* phones */
+@media (min-width: 768px){
+  section.day { scroll-margin-top: 96px; }        /* tablets+ */
+}
+
+/* Global mobile safety */
     html, body { max-width: 100%; overflow-x: hidden; }
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -1105,6 +1111,7 @@ p {
     background-color: DarkBlue;
   }
 }
+
 
 
 
