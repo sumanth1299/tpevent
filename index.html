@@ -807,7 +807,7 @@
   <!-- Day Switcher -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday'];
+      const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday', '#friday'];
       const sections = DAY_IDS.map(id => document.querySelector(id)).filter(Boolean);
       const links = Array.from(document.querySelectorAll('#header .nav-list a'))
         .filter(a => DAY_IDS.includes(a.getAttribute('href')));
@@ -829,6 +829,7 @@
   <script src="./app.js"></script>
 </body>
 </html>
+
 
 
 
