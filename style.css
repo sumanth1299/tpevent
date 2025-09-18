@@ -1,3 +1,304 @@
+  /* Global mobile safety */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* Only one day visible at a time (include FRIDAY) */
+    #monday, #tuesday, #wednesday, #thursday, #friday { display: none; }
+    #monday.active, #tuesday.active, #wednesday.active, #thursday.active, #friday.active { display: block; }
+
+    /* ===== Tuesday: Agenda Cards Rail ===== */
+    #tuesday.tue-agenda{padding:60px 16px;background:#f6f7fb}
+    #tuesday .tue-wrap{max-width:1100px;margin:0 auto}
+    #tuesday .tue-title{
+      text-align:center;margin:0 0 28px;font-weight:800;
+      font-size:clamp(28px,4vw,40px);color:#0f172a
+    }
+    #tuesday .tue-title span{color:#f59e0b}
+    #tuesday .tue-list{display:grid;gap:18px}
+    @media(min-width:720px){ #tuesday .tue-list{gap:20px} }
+    #tuesday .tue-card{
+      display:grid;grid-template-columns:120px 1fr;gap:16px;
+      align-items:start;background:#fff;border-radius:16px;padding:18px;
+      box-shadow:0 10px 26px rgba(2,6,23,.07);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    @media(max-width:560px){ #tuesday .tue-card{grid-template-columns:1fr} }
+    #tuesday .tue-card:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
+    #tuesday .tue-time{display:flex;align-items:flex-start;justify-content:flex-start}
+    #tuesday .tue-chip{
+      display:inline-block;padding:8px 12px;border-radius:999px;
+      font-weight:700;background:#fff7e6;border:1px solid #ffd89a;color:#8b5a00
+    }
+    #tuesday .tue-chip::before{
+      content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+      background:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.22);margin-right:8px
+    }
+    #tuesday .tue-head{
+      margin:0 0 6px;font-size:clamp(18px,2.6vw,22px);font-weight:800;color:#111827;
+      display:flex;align-items:center;gap:10px
+    }
+    #tuesday .tue-ico{
+      width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+      background:#fff3c4;color:#8a4b00;border:1px solid #ffd585
+    }
+    #tuesday .tue-points{margin:8px 0 0 0;padding-left:18px;color:#374151;line-height:1.55}
+    #tuesday .tue-points li{margin:6px 0}
+    #tuesday .tue-note{margin:2px 0 0;color:#374151}
+    #tuesday .tue-card:focus-within{outline:3px solid #f59e0b;outline-offset:4px}
+    @media(prefers-reduced-motion:reduce){ #tuesday .tue-card{transition:none} }
+
+    /* ===== Thursday vertical stack + heading polish ===== */
+    #thursday .all-projects{
+      display:flex !important;
+      flex-direction:column !important;
+      gap:18px;
+      position:relative;
+      padding:0 12px;
+    }
+    #thursday .project-item{
+      max-width: 880px;
+      margin: 0 auto;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding:24px;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+      transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+      will-change: transform, box-shadow;
+    }
+    #thursday .project-info{ min-width:0; flex:1 1 auto; }
+    #thursday .project-info h1,
+    #thursday .project-info h2,
+    #thursday .project-info p{ overflow-wrap:anywhere; word-break:break-word; margin:0 0 6px; }
+    #thursday .project-img{ flex:0 0 auto; }
+    #thursday .project-img img{
+      width:80px !important; height:80px !important;
+      max-width:none !important; object-fit:cover; border-radius:8px; display:block;
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    #thursday .section-title{
+      text-align:center; font-weight:900; letter-spacing:-.015em; line-height:1.1;
+      margin-bottom:28px; position:relative; display:inline-block; padding:6px 16px;
+    }
+    #thursday .section-title::before,
+    #thursday .section-title::after{
+      content:""; display:inline-block; vertical-align:middle;
+      width:clamp(28px,7vw,80px); height:2px; background:rgba(0,0,0,.12);
+      border-radius:2px; margin:0 12px;
+    }
+    #thursday .section-title span{ position:relative; }
+    #thursday .section-title span::after{
+      content:""; position:absolute; left:-4px; right:-4px; bottom:3px;
+      height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+    }
+
+    /* Thursday mobile stack */
+    @media (max-width: 768px) {
+      #thursday > .container{ display:block !important; gap:0 !important; }
+      #thursday .section-title{ display:block; width:100%; margin:0 0 14px; text-align:center; order:-1; }
+      #thursday .all-projects{ display:flex !important; flex-direction:column !important; gap:12px; order:0; }
+      #thursday .project-item{ width:100%; max-width:100%; padding:16px; gap:12px; }
+      #thursday .project-img img{ width:56px !important; height:56px !important; }
+    }
+
+    /* Thursday hover + underline color */
+    @media (hover:hover) and (pointer:fine){
+      #thursday .project-item:hover{
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0,0,0,.14);
+        background-color: #f9fafb;
+      }
+      #thursday .project-item:hover .project-img img{
+        transform: scale(1.06);
+        box-shadow: 0 6px 16px rgba(0,0,0,.18);
+      }
+      #thursday .project-item:hover .project-info h1{
+        text-decoration: underline;
+        text-decoration-color: #fcb900;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+      }
+    }
+    #thursday .project-item:focus-within{
+      outline: 3px solid #fcb900; outline-offset: 3px; transform: translateY(-2px);
+    }
+    @media (hover:none){ #thursday .project-item:active{ transform: scale(0.99); } }
+    @media (prefers-reduced-motion: reduce){
+      #thursday .project-item, #thursday .project-img img{ transition:none; }
+    }
+    #thursday .section-title:hover{
+      text-decoration: underline; text-decoration-color: #fcb900;
+      text-decoration-thickness: 2px; text-underline-offset: 6px;
+    }
+
+    /* ===== WEDNESDAY — Posh Dual Layout (Office + Journey) ===== */
+    #wednesday.wed-posh { padding: 60px 16px; background: #f7f8fb; }
+    #wednesday .wed-wrap { max-width: 1100px; margin: 0 auto; }
+    #wednesday .wed-title{
+      text-align:center; margin:0 0 26px; font-weight:900;
+      font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
+    }
+    #wednesday .wed-title span{ color:#fcb900; position:relative; }
+    #wednesday .wed-title span::after{
+      content:""; position:absolute; inset:auto -6px 4px -6px;
+      height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+    }
+    #wednesday .wed-grid{ display:grid; grid-template-columns:1fr; gap:22px; }
+    @media (min-width: 960px){ #wednesday .wed-grid{ grid-template-columns:1fr 1fr; } }
+    #wednesday .wed-slab{
+      background:#fff; border-radius:16px; padding:18px;
+      box-shadow:0 10px 26px rgba(2,6,23,.07);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    #wednesday .wed-slab:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
+    #wednesday .wed-slab-head{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
+    }
+    #wednesday .wed-slab-head .left{ display:flex; align-items:center; gap:10px; }
+    #wednesday .wed-slab h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+    #wednesday .ico{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background:#fff7e0; color:#8a4b00; border:1px solid #ffd585;
+    }
+    #wednesday .chip{
+      display:inline-block; border-radius:999px; white-space:nowrap; font-weight:700;
+      padding:6px 10px;
+    }
+    #wednesday .chip.time{ color:#8b5a00; background:#fff7e6; border:1px solid #ffd89a; }
+    #wednesday .chip.status{ color:#5b5b5b; background:#f1f1f1; border:1px solid #e6e6e6; }
+    #wednesday .chip.loc{ color:#1f2937; background:#fff; border:1px dashed #cfcfcf; }
+    #wednesday .roster{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px; }
+    #wednesday .person{
+      display:flex; align-items:center; gap:10px; padding:10px 12px;
+      border:1px solid #ececec; border-radius:12px; background:#ffffff;
+    }
+    #wednesday .avatar{
+      width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+      font-weight:800; color:#8a4b00; background:#fff3c4; border:1px solid #ffd585; flex:0 0 auto;
+    }
+    #wednesday .meta .name{ font-weight:700; color:#111827; }
+    #wednesday .meta .note{ font-size:.9rem; color:#6b7280; }
+
+    /* Journey (one continuous line) */
+    #wednesday .wed-journey{
+      background:#fff; border-radius:16px; padding:18px;
+      box-shadow:0 10px 26px rgba(2,6,23,.07);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    #wednesday .wed-journey:hover{ transform:translateY(-3px); box-shadow:0 18px 40px rgba(2,6,23,.12); background:#fafafa; }
+    #wednesday .wed-journey-head{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px;
+    }
+    #wednesday .wed-journey-head .left{ display:flex; align-items:center; gap:10px; }
+    #wednesday .wed-journey h2{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+    #wednesday .crew{ margin:4px 0 12px; color:#374151; }
+
+    #wednesday .journey{
+      position:relative; display:grid; grid-auto-flow:column; grid-auto-columns:minmax(160px, 1fr);
+      gap:18px; padding:18px 10px 6px; overflow-x:auto; overflow-y:hidden; scrollbar-width:thin;
+    }
+    #wednesday .journey::before{
+      content:""; position:absolute; left:10px; right:10px; top:42px;
+      height:3px; background:linear-gradient(90deg, #fcb900, #ffe083);
+      border-radius:3px; opacity:.9;
+    }
+    #wednesday .stop{ position:relative; z-index:1; min-width:0; display:grid; gap:8px; align-content:start; }
+    #wednesday .stop .dot{
+      width:16px; height:16px; border-radius:50%; background:#fff; border:4px solid #fcb900; margin-left:2px;
+      box-shadow:0 0 0 3px rgba(252,185,0,.2);
+    }
+    #wednesday .stop .label .what{ font-weight:800; color:#111827; margin-bottom:2px; }
+    #wednesday .stop .meta{ display:flex; flex-wrap:wrap; gap:6px; }
+    @media (max-width:640px){
+      #wednesday .journey{ grid-auto-columns:minmax(140px, 1fr); gap:14px; }
+      #wednesday .journey::before{ top:38px; }
+    }
+    @media (hover:hover) and (pointer:fine){
+      #wednesday .stop:hover .what{
+        text-decoration:underline; text-decoration-color:#fcb900;
+        text-underline-offset:3px; text-decoration-thickness:2px;
+      }
+    }
+    #wednesday .wed-slab:focus-within, #wednesday .wed-journey:focus-within{ outline:3px solid #fcb900; outline-offset:4px; }
+    @media (prefers-reduced-motion:reduce){ #wednesday .wed-slab, #wednesday .wed-journey{ transition:none; } }
+
+    /* ===== FRIDAY — Posh Ticket UI ===== */
+    #friday.fri-posh { padding: 60px 16px; background:#f7f8fb; }
+    #friday .fri-wrap { max-width: 1100px; margin: 0 auto; }
+    #friday .fri-title{
+      text-align:center; margin:0 0 26px; font-weight:900;
+      font-size:clamp(28px,4vw,40px); color:#0f172a; letter-spacing:-.015em; line-height:1.1;
+    }
+    #friday .fri-title span{ color:#fcb900; position:relative; }
+    #friday .fri-title span::after{
+      content:""; position:absolute; inset:auto -6px 4px -6px;
+      height:.45em; background:currentColor; opacity:.18; border-radius:6px; z-index:-1;
+    }
+    #friday .fri-ticket{
+      position:relative; overflow:hidden; border-radius:20px;
+      background:#fff; box-shadow:0 12px 30px rgba(2,6,23,.08);
+    }
+    #friday .fri-ticket::before,
+    #friday .fri-ticket::after{
+      content:""; position:absolute; top:90px; bottom:90px; width:16px; pointer-events:none;
+      background: radial-gradient(circle at right, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
+    }
+    #friday .fri-ticket::before{ left:-8px; }
+    #friday .fri-ticket::after{
+      right:-8px;
+      background: radial-gradient(circle at left, #f7f8fb 6px, transparent 7px) 0 0/16px 26px repeat-y;
+    }
+    #friday .fri-banner{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:22px 22px;
+      background: linear-gradient(135deg, #fcb900 0%, #ffe08a 100%);
+      border-bottom:1px solid rgba(17,24,39,.08);
+    }
+    #friday .banner-left{ display:flex; align-items:center; gap:12px; min-width:0; }
+    #friday .day-badge{
+      display:inline-block; padding:6px 12px; border-radius:999px;
+      font-weight:900; letter-spacing:.06em; background:#111827; color:#fff;
+    }
+    #friday .banner-title{ margin:0; font-size:clamp(18px,2.6vw,22px); font-weight:800; color:#111827; }
+    #friday .chip{ display:inline-block; padding:6px 10px; border-radius:999px; white-space:nowrap; font-weight:700; }
+    #friday .chip.subtle{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
+    #friday .fri-list{ margin:0; padding:16px 22px 22px; list-style:none; display:grid; gap:12px; }
+    #friday .fri-item{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      background:#ffffff; border-radius:14px; padding:14px 16px;
+      border:1px solid #eee; box-shadow:0 6px 18px rgba(2,6,23,.04);
+      transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+    }
+    #friday .fri-item .title{ display:flex; align-items:center; gap:10px; font-weight:800; color:#111827; }
+    #friday .fri-item .ico{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background:#fff3c4; color:#8a4b00; border:1px solid #ffd585;
+    }
+    #friday .chip.solid{ background:#fff7e6; border:1px solid #ffd89a; color:#8b5a00; }
+    #friday .chip.dashed{ background:#fff; border:1px dashed #cfcfcf; color:#374151; }
+    @media (hover:hover) and (pointer:fine){
+      #friday .fri-item:hover{
+        transform: translateY(-3px);
+        box-shadow:0 14px 32px rgba(2,6,23,.12);
+        background:#fafafa;
+      }
+      #friday .fri-item:hover .title{
+        text-decoration: underline;
+        text-decoration-color: #fcb900;
+        text-underline-offset: 4px;
+        text-decoration-thickness: 2px;
+      }
+    }
+    @media (max-width:560px){
+      #friday .fri-banner{ padding:18px 16px; }
+      #friday .fri-list{ padding:14px 16px 18px; }
+      #friday .fri-item{ padding:12px 12px; }
+      #friday .fri-ticket::before, #friday .fri-ticket::after{ top:70px; bottom:70px; }
+    }
+
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300, 400, 700&display=swap';
 * {
 	padding: 0;
@@ -804,5 +1105,6 @@ p {
     background-color: DarkBlue;
   }
 }
+
 
 
