@@ -1,8 +1,62 @@
-/* Make anchored day sections stop *below* the sticky header */
-section.day { scroll-margin-top: 84px; }          /* phones */
-@media (min-width: 768px){
-  section.day { scroll-margin-top: 96px; }        /* tablets+ */
+/* ===== Wednesday journey: mobile fix for cropping & scroll ===== */
+@media (max-width: 640px){
+  /* let the card grow beyond any parent clipping */
+  #wednesday .wed-journey{
+    overflow: visible !important;
+  }
+
+  /* reliable horizontal scroller with padding and touch momentum */
+  #wednesday .journey{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(180px, 80%);  /* each stop wide enough to read */
+    gap: 14px;
+
+    overflow-x: auto !important;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+
+    padding: 18px 16px 20px;   /* bottom padding so nothing is cut off */
+    margin: 0 -12px;           /* “bleed” to the card edges */
+    position: relative;
+  }
+
+  /* the connecting line sits inside the padded area, not under the edges */
+  #wednesday .journey::before{
+    left: 16px !important;
+    right: 16px !important;
+    top: 40px;                 /* align with dots on small cards */
+    height: 3px;
+  }
+
+  /* make sure each stop content can wrap and never get clipped */
+  #wednesday .stop{ min-width: 0; }
+  #wednesday .stop .label .what{
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* subtle edge fade to indicate more content */
+  #wednesday .journey::after{
+    content: "";
+    position: sticky;
+    right: 0; top: 0; bottom: 0;
+    width: 28px;
+    pointer-events: none;
+    background: linear-gradient(to right, rgba(255,255,255,0), #fff);
+  }
+
+  /* give a bit more space to the last item so it isn't cut by the fade */
+  #wednesday .stop:last-child{
+    padding-right: 10px;
+  }
+
+  /* slightly smaller dots so they don't overflow vertically */
+  #wednesday .stop .dot{
+    width: 14px; height: 14px; border-width: 3px;
+  }
 }
+
 
 /* Global mobile safety */
     html, body { max-width: 100%; overflow-x: hidden; }
@@ -1111,6 +1165,7 @@ p {
     background-color: DarkBlue;
   }
 }
+
 
 
 
