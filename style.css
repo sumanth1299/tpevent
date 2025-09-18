@@ -1,62 +1,68 @@
-/* ===== Wednesday journey: mobile fix for cropping & scroll ===== */
+/* ===== Wednesday -> vertical journey on mobile (no cropping) ===== */
 @media (max-width: 640px){
-  /* let the card grow beyond any parent clipping */
-  #wednesday .wed-journey{
-    overflow: visible !important;
-  }
 
-  /* reliable horizontal scroller with padding and touch momentum */
+  /* never clip inside Wednesday */
+  #wednesday .wed-wrap,
+  #wednesday .wed-grid,
+  #wednesday .wed-journey{ overflow: visible !important; }
+
+  /* turn the journey into a vertical timeline */
   #wednesday .journey{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(180px, 80%);  /* each stop wide enough to read */
-    gap: 14px;
-
-    overflow-x: auto !important;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-
-    padding: 18px 16px 20px;   /* bottom padding so nothing is cut off */
-    margin: 0 -12px;           /* “bleed” to the card edges */
+    display: block !important;
+    overflow: visible !important;
     position: relative;
+    padding: 4px 0 4px 34px;  /* left gutter for line + dots */
+    margin: 0;               /* remove negative margins from previous fixes */
   }
 
-  /* the connecting line sits inside the padded area, not under the edges */
+  /* the vertical line */
   #wednesday .journey::before{
-    left: 16px !important;
-    right: 16px !important;
-    top: 40px;                 /* align with dots on small cards */
-    height: 3px;
-  }
-
-  /* make sure each stop content can wrap and never get clipped */
-  #wednesday .stop{ min-width: 0; }
-  #wednesday .stop .label .what{
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  /* subtle edge fade to indicate more content */
-  #wednesday .journey::after{
     content: "";
-    position: sticky;
-    right: 0; top: 0; bottom: 0;
-    width: 28px;
-    pointer-events: none;
-    background: linear-gradient(to right, rgba(255,255,255,0), #fff);
+    position: absolute;
+    left: 16px;               /* centers the line under the dots */
+    top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(#fcb900, #ffe083);
+    border-radius: 3px;
+    opacity: .95;
   }
 
-  /* give a bit more space to the last item so it isn't cut by the fade */
-  #wednesday .stop:last-child{
-    padding-right: 10px;
+  /* each stop becomes a row */
+  #wednesday .stop{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 14px 0;
+    min-width: 0;            /* allow wrapping */
   }
+  #wednesday .stop:last-child{ margin-bottom: 0; }
 
-  /* slightly smaller dots so they don't overflow vertically */
+  /* the dot sits in the left gutter */
   #wednesday .stop .dot{
-    width: 14px; height: 14px; border-width: 3px;
+    flex: 0 0 auto;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #fcb900;
+    box-shadow: 0 0 0 3px rgba(252,185,0,.20);
+    margin-left: -18px;      /* aligns dot over the line */
+    margin-top: 4px;         /* aligns dot with text block */
   }
-}
 
+  /* labels wrap nicely; no cropping */
+  #wednesday .stop .label{ min-width: 0; }
+  #wednesday .stop .label .what{
+    font-weight: 800; color: #111827;
+    overflow-wrap: anywhere; word-break: break-word;
+    margin-bottom: 4px;
+  }
+  #wednesday .stop .meta{
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+
+  /* give the card itself a touch more padding on phones */
+  #wednesday .wed-journey{ padding: 16px; }
+}
 
 /* Global mobile safety */
     html, body { max-width: 100%; overflow-x: hidden; }
@@ -1165,6 +1171,7 @@ p {
     background-color: DarkBlue;
   }
 }
+
 
 
 
