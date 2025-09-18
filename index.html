@@ -274,30 +274,74 @@
 
   <!-- Day Switcher -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // include FRIDAY
-      const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday', '#friday'];
-      const sections = DAY_IDS.map(id => document.querySelector(id)).filter(Boolean);
-      const links = Array.from(document.querySelectorAll('#header .nav-list a'))
-        .filter(a => DAY_IDS.includes(a.getAttribute('href')));
+  document.addEventListener('DOMContentLoaded', function () {
+    // Include Friday if present
+    const DAY_IDS = ['#monday', '#tuesday', '#wednesday', '#thursday', '#friday'];
 
-      function show(id) {
-        sections.forEach(s => s.classList.toggle('active', ('#' + s.id) === id));
-        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-        const el = document.querySelector(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const sections = DAY_IDS.map(id => document.querySelector(id)).filter(Boolean);
+    const links = Array.from(document.querySelectorAll('#header .nav-list a'))
+      .filter(a => DAY_IDS.includes(a.getAttribute('href')));
+    const header = document.querySelector('#header');
+
+    const getOffset = () => {
+      // measure sticky header; fall back to a sensible default
+      const h = header && header.offsetHeight ? header.offsetHeight : 84;
+      return h + 8; // small breathing room
+    };
+
+    function show(id, opts = {}) {
+      const { pushState = true } = opts;
+
+      sections.forEach(s => s.classList.toggle('active', ('#' + s.id) === id));
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+
+      const el = document.querySelector(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - getOffset();
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+
+      if (pushState) {
         try { history.replaceState(null, '', id); } catch (e) {}
       }
-      links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(a.getAttribute('href')); }));
-      const start = DAY_IDS.includes(location.hash) && document.querySelector(location.hash)
-        ? location.hash : (sections[0] ? ('#' + sections[0].id) : '#thursday');
-      show(start);
+    }
+
+    // Click handling (only for day links)
+    links.forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (DAY_IDS.includes(id)) {
+          e.preventDefault();
+          show(id);
+        }
+      });
     });
-  </script>
+
+    // Initial selection
+    const start = (DAY_IDS.includes(location.hash) && document.querySelector(location.hash))
+      ? location.hash
+      : ('#' + (sections[0] ? sections[0].id : 'monday'));
+
+    // Apply once without pushing history, then re-run after fonts/layout settle
+    show(start, { pushState: false });
+    setTimeout(() => {
+      const current = document.querySelector('#header .nav-list a.active')?.getAttribute('href') || start;
+      show(current, { pushState: false });
+    }, 100);
+
+    // Re-adjust on resize (mobile header height can change)
+    window.addEventListener('resize', () => {
+      const current = document.querySelector('#header .nav-list a.active')?.getAttribute('href');
+      if (current) show(current, { pushState: false });
+    });
+  });
+</script>
+
 
   <script src="./app.js"></script>
 </body>
 </html>
+
 
 
 
